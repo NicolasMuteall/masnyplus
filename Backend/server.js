@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const PORT = process.env.PORT || 3001;
 const app = express();
 const cors = require("cors");
-// const bcrypt = require("bcryptjs-react");
+const bcrypt = require("bcryptjs-react");
 // const transporter = require("./transporter");
 // const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
@@ -32,3 +32,10 @@ connection.connect((err) => {
     }
     console.log('Connexion à la base de données réussie.');
 })
+
+//REQUEST
+const signUp = require("./Request/signUp");
+const login = require("./Request/login");
+
+signUp(app, connection);
+login(app, connection, bcrypt);
