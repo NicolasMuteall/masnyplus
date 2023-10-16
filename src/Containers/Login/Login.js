@@ -2,15 +2,17 @@ import React, { useState } from 'react';
 import './_Login.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
-import bcrypt from "bcryptjs-react";
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import he from 'he';
+import { useDispatch } from 'react-redux';
+import { setIdUser, setNom, setPrenom, setRole, setToken } from '../../store';
 
 const Login = () => {
 
     const [customErrors, setCustomErrors] = useState({});
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     const formik = useFormik({
         initialValues: {
@@ -27,25 +29,29 @@ const Login = () => {
             const { mail, password } = values;
             const sanitizedMail = he.encode(mail);
             const sanitizedPassword = he.encode(password);
-            //const hashedPassword = await bcrypt.hash(sanitizedPassword, 10);
-            console.log(sanitizedMail);
-            console.log(sanitizedPassword);
-            //console.log(hashedPassword);
+            //console.log(sanitizedMail);
+            //console.log(sanitizedPassword);
 
-            axios.post("/login", {
-                mail: sanitizedMail,
-                password: sanitizedPassword,
-            })
-                .then((response) => {
-                    console.log(response.data);
-                    if (response.data === false) {
-                        // Mettez à jour les erreurs personnalisées
-                        setCustomErrors({ error: 'Identifiants incorrects' });
-                    }
-                })
-                .catch((error) => {
-                    console.error("Erreur lors de l'insertion", error);
-                });
+            try {
+                const login = await axios.post("/login", { mail: sanitizedMail, password: sanitizedPassword })
+                //console.log(login.data);
+                if (login.data === false) {
+                    // Mettez à jour les erreurs personnalisées
+                    setCustomErrors({ error: 'Identifiants incorrects' });
+                } else {
+                    const token = await axios.put(`/createToken/${login.data.ID_USER}`)
+                    //console.log(token.data.token);
+                    dispatch(setToken(token.data.token));
+                    dispatch(setIdUser(login.data.ID_USER));
+                    dispatch(setNom(login.data.NAME_USER));
+                    dispatch(setPrenom(login.data.FIRSTNAME_USER));
+                    dispatch(setRole(login.data.ROLE_USER));
+                    navigate('/');
+                }
+
+            } catch (error) {
+                console.error("Erreur lors de la connexion", error);
+            }
         }
     });
 

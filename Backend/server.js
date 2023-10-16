@@ -5,7 +5,7 @@ const app = express();
 const cors = require("cors");
 const bcrypt = require("bcryptjs-react");
 // const transporter = require("./transporter");
-// const jwt = require("jsonwebtoken");
+const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
 
 app.use(express.json());
@@ -36,6 +36,18 @@ connection.connect((err) => {
 //REQUEST
 const signUp = require("./Request/signUp");
 const login = require("./Request/login");
+const createToken = require("./Request/createToken");
+const users = require("./Request/users");
+const deleteUser = require("./Request/deleteUser");
+const verifyToken = require("./Request/verifyToken");
+const createEvent = require("./Request/createEvent");
+const getEvents = require("./Request/getEvents");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
+createToken(app, jwt);
+users(app, connection);
+deleteUser(app, connection);
+verifyToken(app, jwt);
+createEvent(app, connection);
+getEvents(app, connection);

@@ -41,7 +41,7 @@ const login = (app, connection, bcrypt) => {
                                         res.status(200).send(false);
                                     } else {
                                         console.log('MDP CORRECT');
-                                        res.status(200).send(true);
+                                        res.status(200).json(results[0]);
                                         // Le mot de passe correspond, vous pouvez continuer ici pour mettre à jour le mot de passe
                                     }
                                 } catch (error) {

@@ -1,0 +1,58 @@
+.Navbar {
+    background-color: #fff;
+    box-shadow: 0px 2px 6px rgba(0, 0, 0, .1);
+    position: sticky;
+    opacity: 1;
+    z-index: 1000;
+    top: 0;
+    height: 72px;
+    width: 100%;
+    margin: 0 auto;
+    display: flex;
+    align-items: center;
+    padding: 0 16px;
+    gap: 20px;
+
+    .logo {
+        font-weight: bold;
+        font-size: x-large;
+    }
+
+    .menu {
+        margin-top: 16px;
+        list-style: none;
+        gap: 4px;
+        display: flex;
+        flex-grow: 1;
+        justify-content: center;
+        padding-left: 0;
+    }
+
+    li {
+        padding: 8px;
+        border-radius: 8px;
+        white-space: nowrap;
+        font-weight: bold;
+    }
+
+    li:hover {
+        background-color: aliceblue;
+    }
+
+    .div-svg {
+        display: flex;
+        gap: 10px;
+        flex-grow: 0;
+        justify-content: right;
+    }
+
+    .logout {
+        position: relative;
+        bottom: -2px;
+    }
+
+    a {
+        text-decoration: none;
+        color: black;
+    }
+}
