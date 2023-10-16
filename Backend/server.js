@@ -42,6 +42,7 @@ const deleteUser = require("./Request/deleteUser");
 const verifyToken = require("./Request/verifyToken");
 const createEvent = require("./Request/createEvent");
 const getEvents = require("./Request/getEvents");
+const updateEvent = require("./Request/updateEvent");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -51,3 +52,4 @@ deleteUser(app, connection);
 verifyToken(app, jwt);
 createEvent(app, connection);
 getEvents(app, connection);
+updateEvent(app, connection);

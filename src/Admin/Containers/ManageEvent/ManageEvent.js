@@ -13,11 +13,6 @@ const ManageEvent = () => {
     const [modalData, setModalData] = useState({});
     const [modal, setModal] = useState(false);
 
-    //Const Form
-    const [nameEvent, setNameEvent] = useState('');
-    const [dateEvent, setDateEvent] = useState('');
-    const [places, setPlaces] = useState('');
-
     useEffect(() => {
         if (role !== 'admin') {
             navigate('/');
@@ -39,8 +34,26 @@ const ManageEvent = () => {
         }
     }
 
-    const handleSubmit = () => {
-
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        //console.log(modalData);
+        const datetimeISO = modalData.DATE_EVENT;
+        const formattedDatetime = moment(datetimeISO).format("YYYY-MM-DD HH:mm:ss");
+        const updatedData = {
+            ...modalData,
+            DATE_EVENT: formattedDatetime
+        };
+        axios.put(`/updateEvent/${modalData.ID_EVENT}`, updatedData)
+            .then((response) => {
+                console.log(response.data);
+                if (response.data) {
+                    fetchData();
+                    setModal(false);
+                }
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la mise à jour des données:", error);
+            });
     }
 
     return (
