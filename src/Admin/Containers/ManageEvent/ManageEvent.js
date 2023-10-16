@@ -12,6 +12,7 @@ const ManageEvent = () => {
     const navigate = useNavigate();
     const [modalData, setModalData] = useState({});
     const [modal, setModal] = useState(false);
+    const [expandedEvents, setExpandedEvents] = useState({});
 
     useEffect(() => {
         if (role !== 'admin') {
@@ -45,7 +46,7 @@ const ManageEvent = () => {
         };
         axios.put(`/updateEvent/${modalData.ID_EVENT}`, updatedData)
             .then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
                 if (response.data) {
                     fetchData();
                     setModal(false);
@@ -56,18 +57,41 @@ const ManageEvent = () => {
             });
     }
 
+    const handleDelete = (eventId) => {
+        axios.delete(`/deleteEvent/${eventId}`)
+            .then((response) => {
+                if (response.data === true) {
+                    fetchData();
+                    setModal(false);
+                };
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la suppression de l'utilisateur :", error);
+            });
+    }
+
+    const toggleEvent = (event) => {
+        setExpandedEvents({
+            ...expandedEvents,
+            [event.ID_EVENT]: !expandedEvents[event.ID_EVENT]
+        });
+    };
+
     return (
         <div className='ManageEvent container'>
             <h1 className='mt-5'>Gérer les évènements</h1>
             <div>
                 {dataEvent.map(event => (
                     <div className='events mt-3' key={event.ID_EVENT}>
-                        <div className='div-event' onClick={() => { setModalData(event); setModal(true) }}>
+                        <div className='div-event' onClick={() => { setModalData(event); toggleEvent(event); setModal(true) }}>
                             <span>
                                 {event.NAME_EVENT} {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
                             <span>Places restantes: {event.PLACES}</span>
                         </div>
+                        {expandedEvents[event.ID_EVENT] && (
+                            <div>Contenu supplémentaire</div>
+                        )}
                     </div>
                 ))}
             </div>
@@ -93,7 +117,7 @@ const ManageEvent = () => {
                                 <input type="number" className="form-control" id="places" name='places' onChange={(e) => { setModalData({ ...modalData, PLACES: e.target.value }) }} value={modalData.PLACES} />
 
                                 <button type="submit" className="btn btn-primary mt-3">Modifier</button>
-                                <button className='btn btn-danger mt-3 ms-1'>Supprimer</button>
+                                <button className='btn btn-danger mt-3 ms-1' onClick={() => { handleDelete(modalData.ID_EVENT) }}>Supprimer</button>
                             </form>
                         </div>
                     </div>

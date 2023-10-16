@@ -43,6 +43,7 @@ const verifyToken = require("./Request/verifyToken");
 const createEvent = require("./Request/createEvent");
 const getEvents = require("./Request/getEvents");
 const updateEvent = require("./Request/updateEvent");
+const deleteEvent = require("./Request/deleteEvent");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -53,3 +54,4 @@ verifyToken(app, jwt);
 createEvent(app, connection);
 getEvents(app, connection);
 updateEvent(app, connection);
+deleteEvent(app, connection);

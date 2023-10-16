@@ -3,8 +3,11 @@ import './_CreateEvent.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 const CreateEvent = () => {
+
+    const navigate = useNavigate();
 
     const formik = useFormik({
         initialValues: {
@@ -31,7 +34,10 @@ const CreateEvent = () => {
                 places: places,
             })
                 .then((response) => {
-                    console.log(response.data);
+                    //console.log(response.data);
+                    if (response.data) {
+                        navigate('/admin/manageEvent');
+                    }
                 })
                 .catch((error) => {
                     console.error("Erreur lors de l'insertion", error);
