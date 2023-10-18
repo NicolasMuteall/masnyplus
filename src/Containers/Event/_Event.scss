@@ -1,0 +1,15 @@
+.Events {
+    .events {
+        display: flex;
+        flex-direction: column;
+        background-color: rgb(226, 226, 221);
+        border-radius: 5px;
+        padding: 0.5em;
+        cursor: pointer;
+    }
+
+    .div-event {
+        display: flex;
+        justify-content: space-between;
+    }
+}

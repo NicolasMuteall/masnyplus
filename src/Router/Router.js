@@ -8,6 +8,8 @@ import HomeAdmin from '../Admin/Containers/HomeAdmin/HomeAdmin';
 import Users from '../Admin/Containers/Users/Users';
 import CreateEvent from '../Admin/Containers/CreateEvent/CreateEvent';
 import ManageEvent from '../Admin/Containers/ManageEvent/ManageEvent';
+import Event from '../Containers/Event/Event';
+import RegisterEvent from '../Containers/RegisterEvent/RegisterEvent';
 
 const Router = () => {
     return (
@@ -19,6 +21,8 @@ const Router = () => {
                 <Route path='/login' element={< Login />} />
                 <Route path='/home' element={< Home />} />
                 <Route path='/home' element={< Home />} />
+                <Route path='/events' element={< Event />} />
+                <Route path='/event/:id' element={< RegisterEvent />} />
                 <Route path='/admin' element={< HomeAdmin />} />
                 <Route path='/admin/users' element={< Users />} />
                 <Route path='/admin/createEvent' element={< CreateEvent />} />

@@ -13,6 +13,7 @@ const initStore = {
   prenom: '',
   role: '',
   token: '',
+  login: false
 };
 
 // Actions creators
@@ -39,6 +40,11 @@ const setRole = (value) => ({
 
 const setToken = (value) => ({
   type: "setToken",
+  payload: value,
+});
+
+const setLogin = (value) => ({
+  type: "setLogin",
   payload: value,
 });
 
@@ -70,6 +76,11 @@ const rootReducers = (state = initStore, action) => {
         ...state,
         token: action.payload,
       };
+    case "setLogin":
+      return {
+        ...state,
+        login: action.payload,
+      };
     default:
       return state;
   }
@@ -85,4 +96,4 @@ const persistedReducer = persistReducer(persistConfig, rootReducers);
 const store = legacy_createStore(persistedReducer, composeWithDevTools());
 const persistor = persistStore(store);
 
-export { store, persistor, setIdUser, setNom, setPrenom, setRole, setToken };
+export { store, persistor, setIdUser, setNom, setPrenom, setRole, setToken, setLogin };

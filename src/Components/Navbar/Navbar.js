@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import './_Navbar.scss';
 import { Link, useNavigate } from 'react-router-dom';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import logout from '../../assets/logout.png';
 import axios from 'axios';
+import { setLogin } from '../../store';
 
 const Navbar = () => {
 
@@ -11,6 +12,7 @@ const Navbar = () => {
     const token = useSelector((state) => state.token);
     const [connected, setConnected] = useState(false);
     const navigate = useNavigate();
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get('http://localhost:3001/verify-token', {
@@ -22,15 +24,17 @@ const Navbar = () => {
                 //console.log(response.data);
                 if (!response.data) {
                     setConnected(false);
+                    dispatch(setLogin(false));
                 } else {
                     setConnected(true);
+                    dispatch(setLogin(true));
                 }
             })
             .catch(error => {
                 // Token invalide ou expiré, l'utilisateur n'est pas authentifié
                 console.log('TOKEN INVALIDE', error)
             });
-    }, [token, navigate])
+    }, [token, navigate, dispatch])
 
     const handleClickLogout = () => {
         localStorage.clear();
@@ -42,11 +46,10 @@ const Navbar = () => {
             <Link to='/'><div className='logo pointer'>Masny Plus</div></Link>
             <ul className='menu'>
                 <Link to='/signUp'><li className='pointer'>Inscription</li></Link>
-                <Link to='/login'><li className='pointer'>Connexion</li></Link>
+                <Link to='/events'><li className='pointer'>Evènements</li></Link>
                 {role === 'admin' && (
                     <Link to='/admin'><li className='pointer'>Administration</li></Link>
-                )
-                }
+                )}
             </ul>
             <div className='div-svg pointer'>
                 <Link to='/login'>
