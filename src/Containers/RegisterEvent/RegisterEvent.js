@@ -15,14 +15,14 @@ const RegisterEvent = () => {
     const param = useParams();
     const eventId = param.id;
     const [fields, setFields] = useState([]);
-
+    const [registered, setRegistered] = useState(false);
 
 
     useEffect(() => {
         if (!connected) {
             navigate('/');
         }
-    }, [navigate, connected])
+    }, [navigate, connected]);
 
     useEffect(() => {
         const fetchData = async () => {
@@ -37,15 +37,37 @@ const RegisterEvent = () => {
         fetchData();
     }, [eventId]);
 
+    useEffect(() => {
+        axios.get(`/verifRegister/${userId}/${eventId}`, {
+        })
+            .then((response) => {
+                console.log(response.data);
+                if (response.data) {
+                    setRegistered(true);
+                }
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la requête", error);
+            });
+    }, [eventId, userId])
+
     const addField = () => {
-        setFields([
-            ...fields,
-            {
-                id: fields.length,
-                name: "",
-                firstname: "",
-            },
-        ]);
+        if (fields.length < 5 && fields.length < (dataEvent[0].PLACES) - 1) {
+            setFields([
+                ...fields,
+                {
+                    id: fields.length,
+                    name: "",
+                    firstname: "",
+                },
+            ]);
+        }
+    };
+
+    const removeField = (index) => {
+        const updatedFields = [...fields];
+        updatedFields.splice(index, 1);
+        setFields(updatedFields);
     };
 
     const handleChange = (e, index, fieldName) => {
@@ -63,7 +85,36 @@ const RegisterEvent = () => {
 
         if (fields.some(field => field.name.trim() === "" || field.firstname.trim() === "")) {
             console.log("Tous les champs doivent être remplis.");
-            return;
+        } else {
+            const isValid = fields.every(field => {
+
+                const isNameValid = field.name.length >= 3 && /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/.test(field.name);
+
+                const isFirstnameValid = field.firstname.length >= 3 && /^[a-zA-ZÀ-ÖØ-öø-ÿ]+$/.test(field.firstname);
+
+                return isNameValid && isFirstnameValid;
+            });
+
+            if (!isValid) {
+                console.log("Les données ne respectent pas les règles de validation.");
+                return;
+            } else {
+                axios.post("/addRegisterEvent", {
+                    userId: userId,
+                    eventId: parseInt(eventId),
+                    nbPlaces: (fields.length) + 1,
+                    data: fields
+                })
+                    .then((response) => {
+                        console.log(response.data);
+                        if (response.data) {
+                            navigate('/events');
+                        }
+                    })
+                    .catch((error) => {
+                        console.error("Erreur lors de l'insertion", error);
+                    });
+            }
         }
     }
 
@@ -72,36 +123,48 @@ const RegisterEvent = () => {
             <h1 className='text-start'>Inscription à l'évènement : {dataEvent[0] && dataEvent[0].NAME_EVENT}</h1>
             <div>
                 <p>places restantes: {dataEvent[0] && dataEvent[0].PLACES}</p>
-                <div className='add-div'>
-                    <span>S'inscrire en tant que : {userFirstname} {userName}</span>
-                    <button className='btn btn-secondary' onClick={addField}>ajouter une personne</button>
-                </div>
 
-                <form onSubmit={handleSubmit}>
-                    {fields.map((field, index) => (
-                        <div key={field.id} className='w-50 mx-auto'>
-                            <label htmlFor={`name_${field.length}`} className="form-label">Nom:</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id={`name_${field.length}`}
-                                name={`name_${field.length}`}
-                                value={field.name}
-                                onChange={(e) => handleChange(e, index, "name")}
-                            />
-                            <label htmlFor={`firstname_${field.length}`} className="form-label">Prénom:</label>
-                            <input
-                                type="text"
-                                className="form-control"
-                                id={`firstname_${field.length}`}
-                                name={`firstname_${field.length}`}
-
-                                onChange={(e) => handleChange(e, index, "firstname")}
-                            />
+                {!registered ? (
+                    <div>
+                        <div className='add-div'>
+                            <span>S'inscrire en tant que : {userFirstname} {userName}</span>
+                            <button className='btn btn-secondary' onClick={addField}>Ajouter une personne (5 max)</button>
                         </div>
-                    ))}
-                    <button className='btn btn-primary mt-3'>S'inscrire</button>
-                </form>
+
+                        <form onSubmit={handleSubmit}>
+                            {fields.map((field, index) => (
+                                <div key={field.id} className='w-50 mx-auto mb-3'>
+                                    <div className='header-registered'>
+                                        <div className='fw-bold'>Personne {(field.id) + 2}</div>
+                                        <button className='btn btn-danger' onClick={() => removeField(index)}>Retirer</button>
+                                    </div>
+                                    <label htmlFor={`name_${field.id}`} className="form-label">Nom:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id={`name_${field.id}`}
+                                        name={`name_${field.id}`}
+                                        value={field.name}
+                                        onChange={(e) => handleChange(e, index, "name")}
+                                    />
+                                    <label htmlFor={`firstname_${field.id}`} className="form-label">Prénom:</label>
+                                    <input
+                                        type="text"
+                                        className="form-control"
+                                        id={`firstname_${field.id}`}
+                                        name={`firstname_${field.id}`}
+
+                                        onChange={(e) => handleChange(e, index, "firstname")}
+                                    />
+                                </div>
+                            ))}
+                            <div className='text-center'><button className='btn btn-primary mt-3'>S'inscrire</button></div>
+                        </form>
+
+                    </div>
+                ) : (
+                    <div>Inscrit</div>
+                )}
 
             </div>
         </div>

@@ -10,6 +10,7 @@ import CreateEvent from '../Admin/Containers/CreateEvent/CreateEvent';
 import ManageEvent from '../Admin/Containers/ManageEvent/ManageEvent';
 import Event from '../Containers/Event/Event';
 import RegisterEvent from '../Containers/RegisterEvent/RegisterEvent';
+import ManageRegistered from '../Admin/Containers/ManageRegistered/ManageRegistered';
 
 const Router = () => {
     return (
@@ -27,6 +28,7 @@ const Router = () => {
                 <Route path='/admin/users' element={< Users />} />
                 <Route path='/admin/createEvent' element={< CreateEvent />} />
                 <Route path='/admin/manageEvent' element={< ManageEvent />} />
+                <Route path='/admin/manageRegistered/:eventId' element={< ManageRegistered />} />
             </Routes>
         </div>
     );

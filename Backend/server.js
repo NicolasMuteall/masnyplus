@@ -44,6 +44,8 @@ const createEvent = require("./Request/createEvent");
 const getEvents = require("./Request/getEvents");
 const updateEvent = require("./Request/updateEvent");
 const deleteEvent = require("./Request/deleteEvent");
+const addRegisterEvent = require("./Request/addRegisterEvent");
+const verifRegister = require("./Request/VerifRegister");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -55,3 +57,5 @@ createEvent(app, connection);
 getEvents(app, connection);
 updateEvent(app, connection);
 deleteEvent(app, connection);
+addRegisterEvent(app, connection);
+verifRegister(app, connection);

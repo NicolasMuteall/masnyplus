@@ -3,7 +3,7 @@ import moment from 'moment';
 import React, { useEffect, useState } from 'react';
 import './_ManageEvent.scss';
 import { useSelector } from 'react-redux';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const ManageEvent = () => {
 
@@ -115,6 +115,8 @@ const ManageEvent = () => {
 
                                 <label htmlFor="places" className="form-label">Places restantes:</label>
                                 <input type="number" className="form-control" id="places" name='places' onChange={(e) => { setModalData({ ...modalData, PLACES: e.target.value }) }} value={modalData.PLACES} />
+
+                                <button className='btn btn-success mt-3 d-block mx-auto' onClick={() => { navigate(`/admin/manageRegistered/${modalData.ID_EVENT}`) }} >Voir les inscrits</button>
 
                                 <button type="submit" className="btn btn-primary mt-3">Modifier</button>
                                 <button className='btn btn-danger mt-3 ms-1' onClick={() => { handleDelete(modalData.ID_EVENT) }}>Supprimer</button>
