@@ -1,7 +1,8 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import './_ManageRegistered.scss';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
+import axios from 'axios';
 
 const ManageRegistered = () => {
 
@@ -9,6 +10,7 @@ const ManageRegistered = () => {
     const navigate = useNavigate();
     const param = useParams();
     const eventId = param.eventId;
+    const [dataRegister, setDataRegister] = useState([]);
 
     useEffect(() => {
         if (role !== 'admin') {
@@ -16,9 +18,45 @@ const ManageRegistered = () => {
         }
     }, [navigate, role])
 
+    useEffect(() => {
+        axios.get(`/getRegistered/${eventId}`)
+            .then((response) => {
+                console.log(response.data);
+                const dataWithIndividualNames = response.data.map(data => ({
+                    ...data,
+                    individualNames: data.NAMES_REGISTER.split(', '),
+                }));
+                setDataRegister(dataWithIndividualNames);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la mise à jour des données:", error);
+            });
+    }, [eventId])
+
     return (
         <div className='ManageRegistered'>
             <h1>Liste des inscrits pour :</h1>
+            <table className="table table-striped">
+                <thead>
+                    <tr>
+                        <td className='fw-bold'>Nom Prénom</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {dataRegister.map(register => (
+                        <React.Fragment key={register.ID_REGISTER}>
+                            <tr>
+                                <td className='user-table'>{register.NAME_USER} {register.FIRSTNAME_USER}</td>
+                            </tr>
+                            {register.individualNames.map((name, index) => (
+                                <tr key={index}>
+                                    <td className=''>{name}</td>
+                                </tr>
+                            ))}
+                        </React.Fragment>
+                    ))}
+                </tbody>
+            </table>
         </div>
     );
 };

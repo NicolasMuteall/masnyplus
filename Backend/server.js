@@ -7,9 +7,12 @@ const bcrypt = require("bcryptjs-react");
 // const transporter = require("./transporter");
 const jwt = require("jsonwebtoken");
 const dotenv = require("dotenv");
+const path = require('path');
+const multer = require('multer');
 
 app.use(express.json());
 app.use(cors({ origin: 'http://localhost:3000' }));
+app.use('/images', express.static(path.join(__dirname, 'assets')));
 
 dotenv.config();
 
@@ -46,6 +49,10 @@ const updateEvent = require("./Request/updateEvent");
 const deleteEvent = require("./Request/deleteEvent");
 const addRegisterEvent = require("./Request/addRegisterEvent");
 const verifRegister = require("./Request/VerifRegister");
+const getRegistered = require("./Request/getRegistered");
+const uploadImg = require("./Request/uploadImgArticle");
+const addArticle = require("./Request/addArticle");
+const getArticles = require("./Request/getArticles");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -59,3 +66,7 @@ updateEvent(app, connection);
 deleteEvent(app, connection);
 addRegisterEvent(app, connection);
 verifRegister(app, connection);
+getRegistered(app, connection);
+uploadImg(app, multer, path, connection);
+addArticle(app, connection);
+getArticles(app, connection);

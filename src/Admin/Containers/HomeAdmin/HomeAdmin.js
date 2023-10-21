@@ -15,9 +15,11 @@ const HomeAdmin = () => {
 
     return (
         <div className='HomeAdmin mt-5'>
-            <Link to='/admin/users'><button type="button" className="btn btn-primary mt-3">Gérer les utilisateurs</button></Link>
-            <Link to='/admin/createEvent'><button type="button" className="btn btn-primary mt-3">Créer un évènement</button></Link>
-            <Link to='/admin/manageEvent'><button type="button" className="btn btn-primary mt-3">Gérer les évènements</button></Link>
+            <Link to='/admin/users'><button type="button" className="btn btn-primary mt-3 btn-admin">Gérer les utilisateurs</button></Link>
+            <Link to='/admin/createEvent'><button type="button" className="btn btn-primary mt-3 btn-admin">Créer un évènement</button></Link>
+            <Link to='/admin/Event'><button type="button" className="btn btn-primary mt-3 btn-admin">Gérer les évènements</button></Link>
+            <Link to='/admin/createArticle'><button type="button" className="btn btn-primary mt-3 btn-admin">Créer un Article</button></Link>
+            <Link to='/admin/articles'><button type="button" className="btn btn-primary mt-3 btn-admin">Gérer les Articles</button></Link>
         </div>
 
     );
