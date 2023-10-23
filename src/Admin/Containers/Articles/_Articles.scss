@@ -1,1 +1,30 @@
-.Articles-Admin {}
+.Articles-Admin {
+
+    .div-article {
+        background-color: rgb(226, 226, 221);
+        border-radius: 5px;
+        padding: 1em;
+        cursor: pointer;
+        position: relative;
+
+        .body-article {
+            display: flex;
+        }
+
+        .img-article {
+            width: 400px;
+            height: 400px;
+            border-radius: 5px;
+        }
+
+        .content-article {
+            text-align: justify;
+        }
+
+        .btn-modif {
+            position: absolute;
+            bottom: 5px;
+            right: 5px;
+        }
+    }
+}

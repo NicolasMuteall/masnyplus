@@ -13,6 +13,7 @@ import RegisterEvent from '../Containers/RegisterEvent/RegisterEvent';
 import ManageRegistered from '../Admin/Containers/ManageRegistered/ManageRegistered';
 import CreateArticle from '../Admin/Containers/CreateArticle/CreateArticle';
 import Articles from '../Admin/Containers/Articles/Articles';
+import EditArticle from '../Admin/Containers/EditArticle/EditArticle';
 
 const Router = () => {
     return (
@@ -33,6 +34,7 @@ const Router = () => {
                 <Route path='/admin/manageRegistered/:eventId' element={< ManageRegistered />} />
                 <Route path='/admin/createArticle' element={< CreateArticle />} />
                 <Route path='/admin/articles' element={< Articles />} />
+                <Route path='/admin/editArticle/:idArticle' element={< EditArticle />} />
             </Routes>
         </div>
     );

@@ -53,6 +53,9 @@ const getRegistered = require("./Request/getRegistered");
 const uploadImg = require("./Request/uploadImgArticle");
 const addArticle = require("./Request/addArticle");
 const getArticles = require("./Request/getArticles");
+const updateArticle = require("./Request/updateArticle");
+const updateImg = require("./Request/updateImgArticle");
+const deleteArticle = require("./Request/deleteArticle");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -70,3 +73,6 @@ getRegistered(app, connection);
 uploadImg(app, multer, path, connection);
 addArticle(app, connection);
 getArticles(app, connection);
+updateArticle(app, connection);
+updateImg(app, multer, path);
+deleteArticle(app, connection);
