@@ -47,6 +47,7 @@ const Navbar = () => {
             <ul className='menu'>
                 <Link to='/signUp'><li className='pointer'>Inscription</li></Link>
                 <Link to='/events'><li className='pointer'>Evènements</li></Link>
+                <Link to='/blog'><li className='pointer'>Blog</li></Link>
                 {role === 'admin' && (
                     <Link to='/admin'><li className='pointer'>Administration</li></Link>
                 )}

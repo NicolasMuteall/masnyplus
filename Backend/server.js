@@ -56,6 +56,9 @@ const getArticles = require("./Request/getArticles");
 const updateArticle = require("./Request/updateArticle");
 const updateImg = require("./Request/updateImgArticle");
 const deleteArticle = require("./Request/deleteArticle");
+const addComment = require("./Request/addComment");
+const deleteComment = require("./Request/deleteComment");
+const addLike = require("./Request/addLike");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -76,3 +79,6 @@ getArticles(app, connection);
 updateArticle(app, connection);
 updateImg(app, multer, path);
 deleteArticle(app, connection);
+addComment(app, connection);
+deleteComment(app, connection);
+addLike(app, connection);

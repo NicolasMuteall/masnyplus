@@ -1,0 +1,55 @@
+.Blog {
+    .div-article {
+        background-color: rgb(100, 143, 175);
+        border-radius: 5px;
+        padding: 1em;
+        //cursor: pointer;
+        position: relative;
+        color: white;
+
+        .body-article {
+            display: flex;
+            position: relative;
+        }
+
+        .img-article {
+            width: 200px;
+            height: 200px;
+            border-radius: 5px;
+        }
+
+        .content-article {
+            text-align: justify;
+        }
+
+        .footer-article {
+            display: flex;
+            gap: 5px;
+        }
+
+        form {
+            display: flex;
+            gap: 5px;
+        }
+
+        .comment-div {
+            background-color: rgb(161, 226, 242);
+            padding: 5px;
+            border-radius: 10px;
+            color: rgb(92, 90, 90);
+            display: flex;
+        }
+
+        .content-comment {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+        }
+
+        .img-delete {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+    }
+}

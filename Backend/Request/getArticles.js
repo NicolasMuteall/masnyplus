@@ -26,6 +26,26 @@ const getArticles = (app, connection) => {
         });
     });
 
+    app.get('/getComments', (req, res) => {
+
+        connection.query("SELECT c.*, u.ID_USER, u.FIRSTNAME_USER, u.NAME_USER FROM comments c JOIN users u ON c.ID_USER = u.ID_USER", function (err, result) {
+            if (err) throw err;
+            //console.log(result);
+            res.status(200).json(result);
+
+        });
+    });
+
+    app.get('/getLikes', (req, res) => {
+
+        connection.query("SELECT ID_LIKE, ID_USER, ID_ARTICLE, CREATED_AT FROM likes", function (err, result) {
+            if (err) throw err;
+            //console.log(result);
+            res.status(200).json(result);
+
+        });
+    });
+
 }
 
 module.exports = getArticles;

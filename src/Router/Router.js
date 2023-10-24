@@ -14,6 +14,7 @@ import ManageRegistered from '../Admin/Containers/ManageRegistered/ManageRegiste
 import CreateArticle from '../Admin/Containers/CreateArticle/CreateArticle';
 import Articles from '../Admin/Containers/Articles/Articles';
 import EditArticle from '../Admin/Containers/EditArticle/EditArticle';
+import Blog from '../Containers/Blog/Blog';
 
 const Router = () => {
     return (
@@ -35,6 +36,7 @@ const Router = () => {
                 <Route path='/admin/createArticle' element={< CreateArticle />} />
                 <Route path='/admin/articles' element={< Articles />} />
                 <Route path='/admin/editArticle/:idArticle' element={< EditArticle />} />
+                <Route path='/blog' element={< Blog />} />
             </Routes>
         </div>
     );
