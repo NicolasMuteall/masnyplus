@@ -15,6 +15,7 @@ import CreateArticle from '../Admin/Containers/CreateArticle/CreateArticle';
 import Articles from '../Admin/Containers/Articles/Articles';
 import EditArticle from '../Admin/Containers/EditArticle/EditArticle';
 import Blog from '../Containers/Blog/Blog';
+import UpdateUser from '../Containers/UpdateUser/UpdateUser';
 
 const Router = () => {
     return (
@@ -37,6 +38,7 @@ const Router = () => {
                 <Route path='/admin/articles' element={< Articles />} />
                 <Route path='/admin/editArticle/:idArticle' element={< EditArticle />} />
                 <Route path='/blog' element={< Blog />} />
+                <Route path='/updateUser' element={< UpdateUser />} />
             </Routes>
         </div>
     );

@@ -55,4 +55,34 @@
         text-decoration: none;
         color: black;
     }
+
+    .svg-user {
+        position: relative;
+    }
+
+    .menu-user {
+        position: absolute;
+        top: 25px;
+        width: 150px;
+        transform: translateX(-75%);
+        background-color: #fff;
+        display: flex;
+        flex-direction: column;
+        border-radius: 5px;
+
+        hr {
+            margin: 0;
+        }
+    }
+
+    .link-user {
+        padding: 3px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+    .link-user:hover {
+        font-weight: bold;
+        background-color: aliceblue;
+    }
 }

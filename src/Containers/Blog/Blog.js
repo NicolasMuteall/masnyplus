@@ -15,8 +15,40 @@ const Blog = () => {
     const [articleId, setArticleId] = useState(null);
 
     useEffect(() => {
+        const fetchData = async () => {
+            try {
+                const [articlesResponse, commentsResponse, likesResponse] = await Promise.all([
+                    axios.get('/getArticles'),
+                    axios.get('/getcomments'),
+                    axios.get('/getLikes'),
+                ]);
+
+                const articles = articlesResponse.data;
+                const comments = commentsResponse.data;
+                const likes = likesResponse.data;
+
+                const combinedData = articles.map((article) => ({
+                    ...article,
+                    comments: comments.filter((comment) => comment.ID_ARTICLE === article.ID_ARTICLE),
+                    likes: likes.filter((like) => like.ID_ARTICLE === article.ID_ARTICLE),
+                }));
+
+                const combinedDataWithCount = combinedData.map((item) => ({
+                    ...item,
+                    numberOfComments: item.comments.length,
+                    numberOfLikes: item.likes.length,
+                    liked: item.likes.some((like) => like.ID_USER === userId)
+                }));
+
+                setDataArticle(combinedDataWithCount);
+                console.log(combinedDataWithCount);
+
+            } catch (error) {
+                console.error('Erreur lors de la récupération des données :', error);
+            }
+        };
         fetchData();
-    }, []);
+    }, [userId]);
 
     const fetchData = async () => {
         try {
@@ -40,6 +72,7 @@ const Blog = () => {
                 ...item,
                 numberOfComments: item.comments.length,
                 numberOfLikes: item.likes.length,
+                liked: item.likes.some((like) => like.ID_USER === userId)
             }));
 
             setDataArticle(combinedDataWithCount);
@@ -121,7 +154,7 @@ const Blog = () => {
                         <div className='footer-article'>
                             <div>
                                 <svg onClick={() => { addLike(article.ID_ARTICLE) }} className="bouton pointer" width="18" height="16" viewBox="0 0 18 16" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                    <path d="M1.67344 9.43701L8.02617 15.6017C8.28984 15.8575 8.63789 16 9 16C9.36211 16 9.71016 15.8575 9.97383 15.6017L16.3266 9.43701C17.3953 8.40286 18 6.95213 18 5.43563V5.22368C18 2.66938 16.2246 0.491461 13.8023 0.0712247C12.1992 -0.206497 10.568 0.337983 9.42188 1.52926L9 1.96777L8.57812 1.52926C7.43203 0.337983 5.80078 -0.206497 4.19766 0.0712247C1.77539 0.491461 0 2.66938 0 5.22368V5.43563C0 6.95213 0.604687 8.40286 1.67344 9.43701Z" fill="white" />
+                                    <path d="M1.67344 9.43701L8.02617 15.6017C8.28984 15.8575 8.63789 16 9 16C9.36211 16 9.71016 15.8575 9.97383 15.6017L16.3266 9.43701C17.3953 8.40286 18 6.95213 18 5.43563V5.22368C18 2.66938 16.2246 0.491461 13.8023 0.0712247C12.1992 -0.206497 10.568 0.337983 9.42188 1.52926L9 1.96777L8.57812 1.52926C7.43203 0.337983 5.80078 -0.206497 4.19766 0.0712247C1.77539 0.491461 0 2.66938 0 5.22368V5.43563C0 6.95213 0.604687 8.40286 1.67344 9.43701Z" fill={article.liked ? 'red' : 'white'} />
                                 </svg>
                                 <span className='ms-1'>{article.numberOfLikes !== 0 && article.numberOfLikes}</span>
                             </div>
