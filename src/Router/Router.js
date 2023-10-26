@@ -16,6 +16,8 @@ import Articles from '../Admin/Containers/Articles/Articles';
 import EditArticle from '../Admin/Containers/EditArticle/EditArticle';
 import Blog from '../Containers/Blog/Blog';
 import UpdateUser from '../Containers/UpdateUser/UpdateUser';
+import ForgetPassword from '../Containers/ForgetPassword/ForgetPassword';
+import ResetPassword from '../Containers/ResetPassword.js/ResetPassword';
 
 const Router = () => {
     return (
@@ -39,6 +41,8 @@ const Router = () => {
                 <Route path='/admin/editArticle/:idArticle' element={< EditArticle />} />
                 <Route path='/blog' element={< Blog />} />
                 <Route path='/updateUser' element={< UpdateUser />} />
+                <Route path='/forgetPassword' element={< ForgetPassword />} />
+                <Route path='/resetPassword/:token' element={< ResetPassword />} />
             </Routes>
         </div>
     );

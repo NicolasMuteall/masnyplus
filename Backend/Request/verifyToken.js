@@ -18,7 +18,7 @@ const verifyToken = (app, jwt) => {
 
             // Le token est valide
             // Ajouter les informations du token décodé à la requête pour une utilisation ultérieure si nécessaire
-            req.userID = decoded.userID;
+            req.userId = decoded.userId;
 
             // Passer au middleware suivant ou à la gestion de la route
             next();
@@ -27,7 +27,7 @@ const verifyToken = (app, jwt) => {
 
     app.get('/verify-token', verifyToken, (req, res) => {
         // Le token est valide
-        res.json({ userID: req.userID, message: 'Token valide' });
+        res.json({ userId: req.userId, message: 'Token valide' });
     });
 
 }

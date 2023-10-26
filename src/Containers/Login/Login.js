@@ -3,7 +3,7 @@ import './_Login.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import he from 'he';
 import { useDispatch } from 'react-redux';
 import { setIdUser, setNom, setPrenom, setRole, setToken } from '../../store';
@@ -69,7 +69,7 @@ const Login = () => {
                             </span>
                         }
                     </div>
-                    <div className="mb-3">
+                    <div className="">
                         <label htmlFor="password" className="form-label">Mot de passe:</label>
                         <input type="password" className="form-control" id="password" name='password' onChange={formik.handleChange} value={formik.values.password} />
                         {formik.errors.password &&
@@ -78,13 +78,16 @@ const Login = () => {
                             </span>
                         }
                     </div>
+                    <div className='text-end'>
+                        <Link to='/forgetPassword'><span className='forgot-password'>mot de passe oublié?</span></Link>
+                    </div>
                     {customErrors.error &&
                         <div style={{ color: 'red', textAlign: 'center' }}>
                             {customErrors.error}
                         </div>
                     }
                     <div className='text-center mt-3'>
-                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Valider</button>
+                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Connexion</button>
                     </div>
                 </form>
             </div>
