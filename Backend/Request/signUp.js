@@ -10,9 +10,7 @@ const signUp = (app, connection) => {
         const password = req.body.password;
 
         connection.query(
-            "SELECT ID_USER FROM users WHERE MAIL_USER = ?",
-            [mail],
-            (error, result) => {
+            "SELECT ID_USER FROM users WHERE MAIL_USER = ?", [mail], (error, result) => {
                 if (error) {
                     console.error('Erreur lors de l\'insertion', error);
                     res.status(500).send('Erreur lors de la requête');

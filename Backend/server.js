@@ -59,6 +59,9 @@ const deleteArticle = require("./Request/deleteArticle");
 const addComment = require("./Request/addComment");
 const deleteComment = require("./Request/deleteComment");
 const addLike = require("./Request/addLike");
+const updateUser = require("./Request/updateUser");
+const verifyPassword = require("./Request/verifyPassword");
+const updatePassword = require("./Request/updatePassword");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -82,3 +85,6 @@ deleteArticle(app, connection);
 addComment(app, connection);
 deleteComment(app, connection);
 addLike(app, connection);
+updateUser(app, connection);
+verifyPassword(app, connection, bcrypt);
+updatePassword(app, connection);

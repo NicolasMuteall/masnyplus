@@ -4,15 +4,18 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import bcrypt from "bcryptjs-react";
 import axios from 'axios';
-import { useSelector } from 'react-redux';
+import he from 'he';
+import { useDispatch, useSelector } from 'react-redux';
+import { setNom, setPrenom } from '../../store';
 
 const UpdateUser = () => {
 
     const [customErrors, setCustomErrors] = useState({});
     const userId = useSelector((state) => state.idUser);
     const [dataUser, setDataUser] = useState([]);
-
-
+    const [oldPassword, setOldPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const dispatch = useDispatch();
 
     useEffect(() => {
         axios.get(`/user/${userId}`)
@@ -51,7 +54,6 @@ const UpdateUser = () => {
         initialValues: {
             name: '',
             mail: '',
-            password: '',
             firstname: '',
             city: '',
         },
@@ -69,32 +71,27 @@ const UpdateUser = () => {
             mail: Yup.string()
                 .email("Veuillez entrer une adresse mail valide !")
                 .required("Le mail est obligatoire"),
-            password: Yup.string()
-                .min(8, 'Le mot de passe doit avoir au moins 8 caractères')
-                .matches(
-                    /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
-                    'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.'
-                )
-                .required('Le mot de passe est obligatoire'),
         }),
         onSubmit: async (values) => {
-            const { name, mail, password, firstname, city } = values;
-            const hashedPassword = await bcrypt.hash(password, 10);
+            const { name, mail, firstname, city } = values;
+            console.log(values);
+            //const hashedPassword = await bcrypt.hash(password, 10);
 
-            axios.put(`/updateUser/${userId}`, {
+            axios.put(`/updateUserConnected/${userId}`, {
                 mail: mail,
                 name: name,
                 firstname: firstname,
                 city: city,
-                password: hashedPassword,
             })
                 .then((response) => {
                     console.log(response.data);
-                    if (response.data === true) {
-                        // Mettez à jour les erreurs personnalisées
-                        setCustomErrors({ mail: 'Cette adresse email est déjà utilisée' });
-                    } else {
-                        //navigate('/login')
+                    if (response.data === false) {
+                        setCustomErrors({ ...customErrors, mail: 'Cette adresse email est déjà utilisée' });
+                    } else if (response.data === true) {
+                        fetchData();
+                        setCustomErrors({ ...customErrors, mail: '' });
+                        dispatch(setNom(name));
+                        dispatch(setPrenom(firstname));
                     }
                 })
                 .catch((error) => {
@@ -103,70 +100,118 @@ const UpdateUser = () => {
         }
     });
 
+    const submitPassword = async (e) => {
+        e.preventDefault();
+        const sanitizedOldPassword = he.encode(oldPassword);
+        const sanitizedNewPassword = he.encode(newPassword);
+        const hashedPassword = await bcrypt.hash(sanitizedNewPassword, 10);
+        //console.log(sanitizedNewPassword);
+
+        if (oldPassword.trim() === '' || newPassword.trim() === '') {
+            setCustomErrors({ ...customErrors, password: 'Tous les champs sont obligatoires' })
+            return;
+        }
+
+        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(newPassword)) {
+            setCustomErrors({ ...customErrors, password: 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.' })
+            return;
+        }
+
+        try {
+            const verifPassword = await axios.post(`/verifyPassword`, { userId: userId, password: sanitizedOldPassword })
+            //console.log(verifPassword.data);
+            if (verifPassword.data === false) {
+                setCustomErrors({ ...customErrors, password: 'Le mot de passe saisi est incorrect' });
+                return;
+            }
+
+            if (verifPassword.data) {
+                const updatePassword = await axios.put(`/updatePassword`, { userId: userId, password: hashedPassword })
+                //console.log(updatePassword.data);
+                if (updatePassword.data) {
+                    setCustomErrors({ ...customErrors, password: '' });
+                    setNewPassword('');
+                    setOldPassword('');
+                    alert('Votre mot de passe a été modifié avec succès');
+                }
+            }
+
+        } catch (error) {
+            console.error("Erreur lors de la connexion", error);
+        }
+
+    }
+
     return (
         <div className='UpdateUser'>
             <h1>Modification des informations :</h1>
             <div className='w-25 mx-auto mt-5'>
-                {dataUser && dataUser.length > 0 ? (
-                    <form onSubmit={formik.handleSubmit}>
-                        <div className="mb-3">
-                            <label htmlFor="name" className="form-label">Nom:</label>
-                            <input type="text" className="form-control" id="name" name='name' onChange={formik.handleChange} value={formik.values.name} />
-                            {formik.errors.name &&
-                                <span style={{ color: 'red' }}>
-                                    {formik.errors.name}
-                                </span>
-                            }
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="firstname" className="form-label">Prénom:</label>
-                            <input type="text" className="form-control" id="firstname" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
-                            {formik.errors.firstname &&
-                                <span style={{ color: 'red' }}>
-                                    {formik.errors.firstname}
-                                </span>
-                            }
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="city" className="form-label">Ville:</label>
-                            <input type="text" className="form-control" id="city" name='city' onChange={formik.handleChange} value={formik.values.city} />
-                            {formik.errors.city &&
-                                <span style={{ color: 'red' }}>
-                                    {formik.errors.city}
-                                </span>
-                            }
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="mail" className="form-label">Adresse mail:</label>
-                            <input type="mail" className="form-control" id="mail" name='mail' onChange={formik.handleChange} value={formik.values.mail} />
-                            {formik.errors.mail &&
-                                <span style={{ color: 'red' }}>
-                                    {formik.errors.mail}
-                                </span>
-                            }
-                            {customErrors.mail &&
-                                <span style={{ color: 'red' }}>
-                                    {customErrors.mail}
-                                </span>
-                            }
-                        </div>
-                        <div className="mb-3">
-                            <label htmlFor="password" className="form-label">Mot de passe:</label>
-                            <input type="password" className="form-control" id="password" name='password' onChange={formik.handleChange} value={formik.values.password} />
-                            {formik.errors.password &&
-                                <span style={{ color: 'red' }}>
-                                    {formik.errors.password}
-                                </span>
-                            }
-                        </div>
-                        <div className='text-center mt-3'>
-                            <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Valider</button>
-                        </div>
-                    </form>
-                ) : (
-                    <p>Chargement des données utilisateur en cours...</p>
-                )}
+                <form onSubmit={formik.handleSubmit}>
+                    <div className="mb-3">
+                        <label htmlFor="name" className="form-label">Nom:</label>
+                        <input type="text" className="form-control" id="name" name='name' onChange={formik.handleChange} value={formik.values.name} />
+                        {formik.errors.name &&
+                            <span style={{ color: 'red' }}>
+                                {formik.errors.name}
+                            </span>
+                        }
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="firstname" className="form-label">Prénom:</label>
+                        <input type="text" className="form-control" id="firstname" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
+                        {formik.errors.firstname &&
+                            <span style={{ color: 'red' }}>
+                                {formik.errors.firstname}
+                            </span>
+                        }
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="city" className="form-label">Ville:</label>
+                        <input type="text" className="form-control" id="city" name='city' onChange={formik.handleChange} value={formik.values.city} />
+                        {formik.errors.city &&
+                            <span style={{ color: 'red' }}>
+                                {formik.errors.city}
+                            </span>
+                        }
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="mail" className="form-label">Adresse mail:</label>
+                        <input type="mail" className="form-control" id="mail" name='mail' onChange={formik.handleChange} value={formik.values.mail} />
+                        {formik.errors.mail &&
+                            <span style={{ color: 'red' }}>
+                                {formik.errors.mail}
+                            </span>
+                        }
+                        {customErrors.mail &&
+                            <span style={{ color: 'red' }}>
+                                {customErrors.mail}
+                            </span>
+                        }
+                    </div>
+                    <div className='text-center mt-3'>
+                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Enregister</button>
+                    </div>
+                </form>
 
+                <h4 className='mt-3'>Modification du mot de passe :</h4>
+                <form onSubmit={submitPassword}>
+                    <div className="mb-3">
+                        <label htmlFor="password" className="form-label">Ancien mot de passe:</label>
+                        <input type="password" className="form-control" id="password" name='password' onChange={(e) => { setOldPassword(e.target.value) }} value={oldPassword} />
+                    </div>
+                    <div className="mb-3">
+                        <label htmlFor="newPassword" className="form-label">Nouveau Mot de passe:</label>
+                        <input type="password" className="form-control" id="newPassword" name='newPassword' onChange={(e) => { setNewPassword(e.target.value) }} value={newPassword} />
+                    </div>
+                    {customErrors.password &&
+                        <span style={{ color: 'red' }}>
+                            {customErrors.password}
+                        </span>
+                    }
+                    <div className='text-center mt-3'>
+                        <button type="submit" className="btn btn-primary">Modifier</button>
+                    </div>
+                </form>
             </div>
         </div>
     );
