@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import './_Navbar.scss';
+import logo from '../../assets/logo-MasnyPlus.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
 import logout from '../../assets/logout.png';
@@ -54,7 +55,7 @@ const Navbar = () => {
 
     return (
         <div className='Navbar'>
-            <Link to='/'><div className='logo pointer'>Masny Plus</div></Link>
+            <Link to='/'><div className='logo pointer'><img src={logo} alt="logo Masny Plus" /></div></Link>
             <ul className='menu'>
                 <Link to='/events'><li className='pointer'>Evènements</li></Link>
                 <Link to='/blog'><li className='pointer'>Blog</li></Link>

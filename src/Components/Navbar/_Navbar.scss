@@ -14,8 +14,10 @@
     gap: 20px;
 
     .logo {
-        font-weight: bold;
-        font-size: x-large;
+        img {
+            width: 80px;
+            height: 70px;
+        }
     }
 
     .menu {

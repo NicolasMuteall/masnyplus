@@ -7,15 +7,24 @@ import axios from 'axios';
 import he from 'he';
 import { useDispatch, useSelector } from 'react-redux';
 import { setNom, setPrenom } from '../../store';
+import { useNavigate } from 'react-router-dom';
 
 const UpdateUser = () => {
 
     const [customErrors, setCustomErrors] = useState({});
     const userId = useSelector((state) => state.idUser);
+    const connected = useSelector((state) => state.login);
     const [dataUser, setDataUser] = useState([]);
     const [oldPassword, setOldPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const dispatch = useDispatch();
+    const navigate = useNavigate();
+
+    useEffect(() => {
+        if (!connected) {
+            navigate('/');
+        }
+    }, [connected, navigate])
 
     useEffect(() => {
         axios.get(`/user/${userId}`)
