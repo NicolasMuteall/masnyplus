@@ -12,6 +12,7 @@ const RegisterEvent = () => {
     const userFirstname = useSelector((state) => state.prenom);
     const navigate = useNavigate();
     const [dataEvent, setDataEvent] = useState([]);
+    const [dataRegister, setDataRegister] = useState([]);
     const param = useParams();
     const eventId = param.id;
     const [fields, setFields] = useState([]);
@@ -28,7 +29,7 @@ const RegisterEvent = () => {
         const fetchData = async () => {
             try {
                 const response = await axios.get(`/getEvent/${eventId}`);
-                console.log(response.data);
+                //console.log(response.data);
                 setDataEvent(response.data);
             } catch (error) {
                 console.error("Erreur lors de la récupération des données: ", error);
@@ -38,18 +39,20 @@ const RegisterEvent = () => {
     }, [eventId]);
 
     useEffect(() => {
-        axios.get(`/verifRegister/${userId}/${eventId}`, {
-        })
-            .then((response) => {
-                console.log(response.data);
-                if (response.data) {
-                    setRegistered(true);
-                }
-            })
-            .catch((error) => {
-                console.error("Erreur lors de la requête", error);
-            });
-    }, [eventId, userId])
+        const fetchRegister = async () => {
+            try {
+                const register = await axios.get(`/verifRegister/${userId}/${eventId}`);
+                //console.log(register.data);
+                const idRegister = parseInt(register.data[0].ID_REGISTER);
+                const responseDataRegister = await axios.get(`/getRegistered-user/${idRegister}`);
+                console.log(responseDataRegister.data);
+                setDataRegister(responseDataRegister.data)
+            } catch (error) {
+                console.error("Erreur lors de la récupération des données: ", error);
+            }
+        }
+        fetchRegister();
+    }, [eventId, userId, connected])
 
     const addField = () => {
         if (fields.length < 5 && fields.length < (dataEvent[0].PLACES) - 1) {

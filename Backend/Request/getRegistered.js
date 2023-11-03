@@ -10,7 +10,22 @@ const getRegistered = (app, connection) => {
                 console.error('Erreur lors de la requête :', err);
                 return res.status(500).send('Erreur lors de la requête à la base de données.');
             }
-            console.log(results);
+            //console.log(results);
+            res.status(200).json(results);
+        });
+    });
+
+    app.get('/getRegistered-user/:id', (req, res) => {
+        const registerId = req.params.id;
+
+        const sql = "SELECT ID_REGISTER, ID_USER, NAMES_REGISTER, NB_PLACES FROM register WHERE ID_REGISTER = ?";
+
+        connection.query(sql, [registerId], (err, results) => {
+            if (err) {
+                console.error('Erreur lors de la requête :', err);
+                return res.status(500).send('Erreur lors de la requête à la base de données.');
+            }
+            //console.log(results);
             res.status(200).json(results);
         });
     });

@@ -7,21 +7,57 @@ import { useNavigate } from 'react-router-dom';
 
 const Event = () => {
 
+    const userId = useSelector((state) => state.idUser);
     const [dataEvent, setDataEvent] = useState([]);
     const connected = useSelector((state) => state.login);
     const [expandedEvents, setExpandedEvents] = useState({});
     const navigate = useNavigate();
 
     useEffect(() => {
+        const fetchData = async () => {
+            if (connected) {
+                try {
+                    const [eventsResponse, registersResponse] = await Promise.all([
+                        axios.get("/getEvents"),
+                        axios.get(`/verifRegister-user/${userId}`),
+                    ]);
+                    //console.log(eventsResponse.data);
+                    //console.log(registersResponse.data);
+
+                    const events = eventsResponse.data;
+                    const registers = registersResponse.data;
+
+                    const combinedData = events.map((event) => ({
+                        ...event,
+                        register: registers.filter((register) => register.ID_EVENT === event.ID_EVENT),
+                        isRegistered: registers.some((register) => register.ID_EVENT === event.ID_EVENT),
+                    }));
+
+                    console.log(combinedData);
+
+                    setDataEvent(combinedData);
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des données: ", error);
+                }
+            } else {
+                try {
+                    const events = await axios.get("/getEvents");
+                    console.log(events.data);
+                    setDataEvent(events.data);
+                } catch (error) {
+                    console.error("Erreur lors de la récupération des données: ", error);
+                }
+            }
+        }
         fetchData();
-    }, []);
+    }, [userId, connected]);
 
 
     const fetchData = async () => {
         try {
-            const response = await axios.get("/getEvents");
-            console.log(response.data);
-            setDataEvent(response.data);
+            const events = await axios.get("/getEvents");
+            console.log(events.data);
+            setDataEvent(events.data);
         } catch (error) {
             console.error("Erreur lors de la récupération des données: ", error);
         }
@@ -42,12 +78,15 @@ const Event = () => {
                     <div className='events mt-3' key={event.ID_EVENT} onClick={() => { toggleEvent(event) }}>
                         <div className='div-event'>
                             <span>
-                                {event.NAME_EVENT} {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
+                                {event.NAME_EVENT} le {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
                             <div>
                                 <span>Places restantes: {event.PLACES}</span>
-                                {connected && (
+                                {(connected && event.PLACES > 0 && event.isRegistered === false) && (
                                     <button className='btn btn-primary ms-2' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>s'inscrire</button>
+                                )}
+                                {(connected && event.isRegistered === true) && (
+                                    <button className='btn btn-secondary ms-2 btn-register' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>inscrit</button>
                                 )}
                             </div>
                         </div>
