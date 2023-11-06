@@ -19,6 +19,7 @@ const UpdateUser = () => {
     const [newPassword, setNewPassword] = useState('');
     const dispatch = useDispatch();
     const navigate = useNavigate();
+    const [modal, setModal] = useState(false);
 
     useEffect(() => {
         if (!connected) {
@@ -151,6 +152,17 @@ const UpdateUser = () => {
 
     }
 
+    const handleDelete = () => {
+        axios.delete(`/deleteUser/${userId}`)
+            .then((response) => {
+                localStorage.clear();
+                window.location.reload();
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la suppression de l'utilisateur :", error);
+            });
+    }
+
     return (
         <div className='UpdateUser'>
             <h1>Modification des informations :</h1>
@@ -221,7 +233,24 @@ const UpdateUser = () => {
                         <button type="submit" className="btn btn-primary">Modifier</button>
                     </div>
                 </form>
+
+                <div className='text-center mt-3'>
+                    <button className='btn btn-danger' onClick={() => { setModal(true) }}>Supprimer mon compte</button></div>
             </div>
+            {modal && (
+                <div className="page-shadow">
+                    <div className='modal-delete border text-center rounded'>
+                        <span onClick={() => { setModal(false) }} className="material-symbols-outlined close">
+                            close
+                        </span>
+                        <p className='mt-3'>Voulez-vous vraiment supprimer le compte ?</p>
+                        <div>
+                            <button className='btn btn-primary' onClick={() => setModal(false)}>Non</button>
+                            <button className='btn btn-danger ms-1' onClick={handleDelete}>Oui</button>
+                        </div>
+                    </div>
+                </div>
+            )}
         </div>
     );
 };

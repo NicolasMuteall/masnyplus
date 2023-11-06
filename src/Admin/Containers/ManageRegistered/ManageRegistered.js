@@ -11,6 +11,9 @@ const ManageRegistered = () => {
     const param = useParams();
     const eventId = param.eventId;
     const [dataRegister, setDataRegister] = useState([]);
+    const [dataEvent, setDataEvent] = useState([]);
+    const [nbPlaces, setNbPlaces] = useState(0);
+    const [nameEvent, setNameEvent] = useState('');
 
     useEffect(() => {
         if (role !== 'admin') {
@@ -21,21 +24,44 @@ const ManageRegistered = () => {
     useEffect(() => {
         axios.get(`/getRegistered/${eventId}`)
             .then((response) => {
-                console.log(response.data);
+                //console.log(response.data);
                 const dataWithIndividualNames = response.data.map(data => ({
                     ...data,
                     individualNames: data.NAMES_REGISTER.split(', '),
                 }));
+                console.log(dataWithIndividualNames);
                 setDataRegister(dataWithIndividualNames);
+                setNbPlaces(response.data.reduce((accumulator, record) => accumulator + record.NB_PLACES, 0));
             })
             .catch((error) => {
                 console.error("Erreur lors de la mise à jour des données:", error);
             });
     }, [eventId])
 
+    useEffect(() => {
+        axios.get('/getEvents')
+            .then((response) => {
+                //console.log(response.data);
+                const events = response.data;
+                const filteredEvents = events.filter((event) => event.ID_EVENT === parseInt(eventId));
+                setNameEvent(filteredEvents[0].NAME_EVENT);
+            })
+            .catch((error) => {
+                console.error("Erreur lors de la mise à jour des données:", error);
+            });
+    }, [eventId]);
+
     return (
         <div className='ManageRegistered'>
-            <h1>Liste des inscrits pour :</h1>
+            <h1 className='mt-5'>Liste des inscrits pour {nameEvent} :</h1>
+
+            <div className='container container-nb mt-3 mb-3'>
+                <div className='nb-register'>
+                    <div>Nombre de personnes inscrites : </div>
+                    <div>{nbPlaces}</div>
+                </div>
+            </div>
+
             <table className="table table-striped">
                 <thead>
                     <tr>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Route, Routes } from 'react-router-dom';
+import { Navigate, Route, Routes } from 'react-router-dom';
 import Home from '../Containers/Home/Home';
 import SignUp from '../Containers/SignUp/SignUp';
 import Login from '../Containers/Login/Login';
@@ -18,6 +18,7 @@ import Blog from '../Containers/Blog/Blog';
 import UpdateUser from '../Containers/UpdateUser/UpdateUser';
 import ForgetPassword from '../Containers/ForgetPassword/ForgetPassword';
 import ResetPassword from '../Containers/ResetPassword.js/ResetPassword';
+import Page404 from '../Containers/Page404/Page404';
 
 const Router = () => {
     return (
@@ -41,6 +42,8 @@ const Router = () => {
                 <Route path='/updateUser' element={< UpdateUser />} />
                 <Route path='/forgetPassword' element={< ForgetPassword />} />
                 <Route path='/resetPassword/:token' element={< ResetPassword />} />
+                <Route path='/404' element={< Page404 />} />
+                <Route path="*" element={<Navigate to='/404' />} />
             </Routes>
         </div>
     );

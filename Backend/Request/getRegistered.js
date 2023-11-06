@@ -3,7 +3,7 @@ const getRegistered = (app, connection) => {
     app.get('/getRegistered/:id', (req, res) => {
         const eventId = req.params.id;
 
-        const sql = "SELECT r.ID_REGISTER, r.ID_USER, r.NAMES_REGISTER, r.PAYED, r.CREATED_AT, u.NAME_USER, u.FIRSTNAME_USER FROM register AS r JOIN users AS u ON r.ID_USER = u.ID_USER WHERE r.ID_EVENT = ?";
+        const sql = "SELECT r.ID_REGISTER, r.ID_USER, r.NAMES_REGISTER, r.PAYED, r.NB_PLACES, r.CREATED_AT, u.NAME_USER, u.FIRSTNAME_USER FROM register AS r JOIN users AS u ON r.ID_USER = u.ID_USER WHERE r.ID_EVENT = ?";
 
         connection.query(sql, [eventId], (err, results) => {
             if (err) {

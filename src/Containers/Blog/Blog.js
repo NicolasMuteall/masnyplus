@@ -11,8 +11,7 @@ const Blog = () => {
     const userId = useSelector((state) => state.idUser);
     const [dataArticle, setDataArticle] = useState([]);
     const [expandedArticle, setExpandedArticle] = useState({});
-    const [comment, setComment] = useState('');
-    const [articleId, setArticleId] = useState(null);
+    const [comments, setComments] = useState(Array(dataArticle.length).fill(''));
 
     useEffect(() => {
         const fetchData = async () => {
@@ -90,12 +89,18 @@ const Blog = () => {
         });
     };
 
-    const handleSubmit = (e) => {
+    const handleCommentChange = (e, index) => {
+        const updatedComments = [...comments];
+        updatedComments[index] = e.target.value;
+        setComments(updatedComments);
+    };
+
+    const handleSubmit = (e, articleId) => {
         e.preventDefault();
 
         const data = {
             userId: userId,
-            comment: comment,
+            comment: comments[dataArticle.findIndex((article) => article.ID_ARTICLE === articleId)],
             articleId: articleId
         };
         console.log(data);
@@ -103,7 +108,9 @@ const Blog = () => {
         axios.post('/addComment', data)
             .then(response => {
                 console.log(response.data);
-                setComment('');
+                const newComments = [...comments];
+                newComments[dataArticle.findIndex((article) => article.ID_ARTICLE === articleId)] = '';
+                setComments(newComments);
                 fetchData();
             })
             .catch(error => {
@@ -143,8 +150,8 @@ const Blog = () => {
         <div className='Blog'>
             <h1 className='mt-5'>Actualités Masny Plus</h1>
             <div className='container'>
-                {dataArticle.map(article => (
-                    <div className='div-article mt-3' key={article.ID_ARTICLE} >
+                {dataArticle.map((article, index) => (
+                    <div className='div-article mt-3 mb-5' key={article.ID_ARTICLE} >
                         <h4 className='text-center'>{article.TITLE_ARTICLE}</h4>
                         <div className='body-article'>
                             <img className='img-article' src={`/images/articles/${article.ID_ARTICLE}/${article.IMG_ARTICLE}`} alt={article.IMG_ARTICLE} />
@@ -172,10 +179,10 @@ const Blog = () => {
                                     <hr />
                                     {connected && (
                                         <div>
-                                            <form onSubmit={handleSubmit}>
-                                                <input type="text" placeholder='Ecrire un commentaire...' className="form-control" value={comment}
-                                                    onChange={(e) => setComment(e.target.value)} />
-                                                <button onClick={() => { setArticleId(article.ID_ARTICLE) }} type="submit" className="btn btn-primary">Commenter</button>
+                                            <form onSubmit={(e) => handleSubmit(e, article.ID_ARTICLE)}>
+                                                <input type="text" placeholder='Ecrire un commentaire...' className="form-control" value={comments[index]}
+                                                    onChange={(e) => handleCommentChange(e, index)} />
+                                                <button type="submit" className="btn btn-primary">Commenter</button>
                                             </form>
                                             <hr />
                                         </div>

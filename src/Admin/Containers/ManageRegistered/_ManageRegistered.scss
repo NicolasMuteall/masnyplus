@@ -3,4 +3,17 @@
         background-color: rgb(134, 134, 204);
         color: white;
     }
+
+    .nb-register {
+        padding: 10px;
+        border-radius: 5px;
+        display: inline-block;
+        text-align: center;
+        background-color: #cee3f1;
+    }
+
+    .container-nb {
+        display: flex;
+        justify-content: flex-end;
+    }
 }

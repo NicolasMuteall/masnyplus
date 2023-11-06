@@ -143,7 +143,6 @@ const Event = () => {
                             close
                         </span>
                         <p className='mt-3'>Voulez-vous vraiment annuler l'inscription ?</p>
-                        <p>{eventId}</p>
                         <div>
                             <button className='btn btn-primary' onClick={() => setModal(false)}>Non</button>
                             <button className='btn btn-danger ms-1' onClick={() => { deleteRegister(eventId) }}>Oui</button>
