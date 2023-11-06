@@ -63,6 +63,7 @@ const updateUser = require("./Request/updateUser");
 const verifyPassword = require("./Request/verifyPassword");
 const updatePassword = require("./Request/updatePassword");
 const sendMail = require("./Request/sendMail");
+const deleteRegister = require("./Request/deleteRegister");
 
 signUp(app, connection);
 login(app, connection, bcrypt);
@@ -90,3 +91,4 @@ updateUser(app, connection);
 verifyPassword(app, connection, bcrypt);
 updatePassword(app, connection);
 sendMail(app, connection, jwt, transporter);
+deleteRegister(app, connection);

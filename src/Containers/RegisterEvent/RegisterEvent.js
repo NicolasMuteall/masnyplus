@@ -12,7 +12,6 @@ const RegisterEvent = () => {
     const userFirstname = useSelector((state) => state.prenom);
     const navigate = useNavigate();
     const [dataEvent, setDataEvent] = useState([]);
-    const [dataRegister, setDataRegister] = useState([]);
     const param = useParams();
     const eventId = param.id;
     const [fields, setFields] = useState([]);
@@ -42,17 +41,16 @@ const RegisterEvent = () => {
         const fetchRegister = async () => {
             try {
                 const register = await axios.get(`/verifRegister/${userId}/${eventId}`);
-                //console.log(register.data);
-                const idRegister = parseInt(register.data[0].ID_REGISTER);
-                const responseDataRegister = await axios.get(`/getRegistered-user/${idRegister}`);
-                console.log(responseDataRegister.data);
-                setDataRegister(responseDataRegister.data)
+                console.log(register.data);
+                if (register.data.length > 0) {
+                    navigate('/events')
+                }
             } catch (error) {
                 console.error("Erreur lors de la récupération des données: ", error);
             }
         }
         fetchRegister();
-    }, [eventId, userId, connected])
+    }, [eventId, userId, navigate])
 
     const addField = () => {
         if (fields.length < 5 && fields.length < (dataEvent[0].PLACES) - 1) {
