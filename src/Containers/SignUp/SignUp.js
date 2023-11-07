@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import './_SignUp.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
@@ -38,7 +38,7 @@ const SignUp = () => {
                     if (value && value.length === 5) {
                         axios.get(`https://geo.api.gouv.fr/communes?codePostal=${value}`)
                             .then((response) => {
-                                //console.log(response.data);
+                                console.log(response.data);
                                 setCommunes(response.data);
                                 if (response.data.length === 0) {
                                     setSelectedVille('');
@@ -66,7 +66,7 @@ const SignUp = () => {
                 .required('Le mot de passe est obligatoire'),
         }),
         onSubmit: async (values) => {
-            const { name, mail, password, firstname, codePostal } = values;
+            const { name, mail, password, firstname } = values;
             const hashedPassword = await bcrypt.hash(password, 10);
 
             console.log(selectedVille);
@@ -99,7 +99,7 @@ const SignUp = () => {
     return (
         <div className='Inscription'>
             <h1 className='mt-5'>Inscription</h1>
-            <div className='w-25 mx-auto mt-5'>
+            <div className='w-25 mx-auto mt-5 form-signUp'>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nom:</label>
@@ -123,15 +123,15 @@ const SignUp = () => {
 
                     <div className="mb-3 city">
 
-                        <div>
+                        <div className='w-50'>
                             <label htmlFor="codePostal" className="form-label">Code postal:</label>
                             <input type="number" max='99999' className="form-control" id="codePostal" name='codePostal' onChange={formik.handleChange} value={formik.values.codePostal} />
                         </div>
 
-                        <div className='ms-2'>
+                        <div className='ms-2 div-ville'>
                             <label htmlFor="Ville" className="form-label">Ville:</label>
                             <select className="form-select" aria-label="Default select example" value={selectedVille} onChange={handleSelectChange}>
-                                <option value=''>...</option>
+                                {/* <option value=''>...</option> */}
                                 {communes.map((commune, index) => (
                                     <React.Fragment key={index}>
                                         <option value={commune.nom}>{commune.nom}</option>
@@ -177,7 +177,7 @@ const SignUp = () => {
                         }
                     </div>
                     <div className='text-center mt-3'>
-                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Valider</button>
+                        <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>S'inscrire</button>
                     </div>
                 </form>
             </div>

@@ -58,7 +58,7 @@ const Login = () => {
     return (
         <div className='Login'>
             <h1>Connexion</h1>
-            <div className='w-25 mx-auto mt-5'>
+            <div className='form-login w-25 mx-auto mt-5'>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="mail" className="form-label">Adresse mail:</label>

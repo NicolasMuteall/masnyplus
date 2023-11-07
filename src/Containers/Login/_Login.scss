@@ -1,3 +1,9 @@
+@media screen and (max-width: 768px) {
+    .Login .form-login {
+        width: 80% !important;
+    }
+}
+
 .Login {
     .forgot-password {
         color: rgb(73, 78, 225);

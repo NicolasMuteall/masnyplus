@@ -122,16 +122,17 @@ const UpdateUser = () => {
             return;
         }
 
-        if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(newPassword)) {
-            setCustomErrors({ ...customErrors, password: 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.' })
-            return;
-        }
 
         try {
             const verifPassword = await axios.post(`/verifyPassword`, { userId: userId, password: sanitizedOldPassword })
             //console.log(verifPassword.data);
             if (verifPassword.data === false) {
-                setCustomErrors({ ...customErrors, password: 'Le mot de passe saisi est incorrect' });
+                setCustomErrors({ ...customErrors, password: "L'ancien mot de passe saisi est incorrect" });
+                return;
+            }
+
+            if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/.test(newPassword)) {
+                setCustomErrors({ ...customErrors, password: 'Le mot de passe doit contenir au moins une lettre majuscule, une lettre minuscule, un chiffre et un caractère spécial.' })
                 return;
             }
 

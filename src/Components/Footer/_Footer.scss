@@ -1,0 +1,34 @@
+.Footer {
+    background-color: #cee3f1;
+    width: 100%;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    flex-wrap: wrap;
+
+    img {
+        width: 120px;
+        height: 110px;
+    }
+
+    .coordonnees {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .location {
+        width: 20px;
+        height: 20px;
+    }
+
+    .email {
+        width: 20px;
+        height: 20px;
+    }
+
+    .telephone {
+        width: 20px;
+        height: 20px;
+    }
+}

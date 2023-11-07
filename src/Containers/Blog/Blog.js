@@ -182,7 +182,7 @@ const Blog = () => {
                                             <form onSubmit={(e) => handleSubmit(e, article.ID_ARTICLE)}>
                                                 <input type="text" placeholder='Ecrire un commentaire...' className="form-control" value={comments[index]}
                                                     onChange={(e) => handleCommentChange(e, index)} />
-                                                <button type="submit" className="btn btn-primary">Commenter</button>
+                                                <button type="submit" className="btn btn-primary radius50">Commenter</button>
                                             </form>
                                             <hr />
                                         </div>

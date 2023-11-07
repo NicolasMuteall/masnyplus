@@ -10,7 +10,13 @@
 
     .div-event {
         display: flex;
-        justify-content: space-between;
+        flex-wrap: wrap;
+    }
+
+    .nb-places {
+        display: flex;
+        flex-grow: 1;
+        justify-content: flex-end;
     }
 
     .btn-register {

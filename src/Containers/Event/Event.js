@@ -120,13 +120,13 @@ const Event = () => {
                             <span>
                                 {event.NAME_EVENT} le {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
-                            <div>
+                            <div className='nb-places'>
                                 <span>Places restantes: {event.PLACES}</span>
                                 {(connected && event.PLACES > 0 && event.isRegistered === false) && (
-                                    <button className='btn btn-primary ms-2' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>S'inscrire</button>
+                                    <button className='btn btn-primary ms-2 radius50' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>S'inscrire</button>
                                 )}
                                 {connected && event.isRegistered === true && (
-                                    <button className='btn btn-secondary ms-2 btn-register' onClick={() => { setModal(true); setEventId(event.ID_EVENT) }}>Annuler</button>
+                                    <button className='btn btn-secondary ms-2 btn-register radius50' onClick={() => { setModal(true); setEventId(event.ID_EVENT) }}>Annuler</button>
                                 )}
                             </div>
                         </div>

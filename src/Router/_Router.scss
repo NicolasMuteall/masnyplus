@@ -1,0 +1,11 @@
+.main-container {
+    min-height: 80vh;
+    display: flex;
+    flex-direction: column;
+
+    footer {
+        position: relative;
+        bottom: 0;
+        width: 100%;
+    }
+}

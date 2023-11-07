@@ -1,15 +1,28 @@
+@media screen and (max-width: 768px) {
+    .Blog {
+        .content-article {
+            width: 100%;
+        }
+
+        .img-article {
+            margin: auto;
+        }
+    }
+}
+
 .Blog {
     .div-article {
         background-color: rgb(138, 188, 227);
         border-radius: 5px;
         padding: 1em;
-        //cursor: pointer;
         position: relative;
         color: white;
+        box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.36);
 
         .body-article {
             display: flex;
             position: relative;
+            flex-wrap: wrap;
         }
 
         .img-article {
@@ -51,5 +64,9 @@
             height: 20px;
             cursor: pointer;
         }
+    }
+
+    .div-article:hover {
+        box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.18);
     }
 }
