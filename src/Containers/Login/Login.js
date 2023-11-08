@@ -87,7 +87,7 @@ const Login = () => {
                         </div>
                     }
                     <div className='text-center mt-3'>
-                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Connexion</button>
+                        <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>Connexion</button>
                     </div>
                 </form>
             </div>

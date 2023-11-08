@@ -1,0 +1,53 @@
+@media screen and (max-width: 1000px) {
+    .Home {
+        main {
+            flex-wrap: wrap;
+        }
+
+        .div-img {
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .replace-img {
+            margin: auto;
+        }
+    }
+}
+
+@media screen {
+    .Home {
+
+        main {
+            display: flex;
+        }
+
+        .replace-img {
+            width: 435px;
+            height: 365px;
+            background-color: aliceblue;
+        }
+
+        .presentation {
+            text-align: justify;
+        }
+
+        .faq {
+            background-color: aliceblue;
+        }
+
+        .faq-headers {
+            display: flex;
+            align-items: center;
+
+            h6 {
+                flex-grow: 1;
+            }
+
+            .btn-moins {
+                width: 36.95px;
+                height: 38px;
+            }
+        }
+    }
+}
