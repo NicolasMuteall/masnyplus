@@ -43,8 +43,8 @@ const ForgetPassword = () => {
     });
 
     return (
-        <div className='ForgetPassword'>
-            <div className='w-50 mx-auto mt-5'>
+        <div className='ForgetPassword container'>
+            <div className='w-50 form-forget mx-auto mt-5'>
                 <p>Renseignez votre adresse email pour recevoir un lien de réinitialisation :</p>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">

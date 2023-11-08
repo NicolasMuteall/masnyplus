@@ -165,9 +165,9 @@ const UpdateUser = () => {
     }
 
     return (
-        <div className='UpdateUser'>
-            <h1>Modification des informations :</h1>
-            <div className='w-25 mx-auto mt-5'>
+        <div className='UpdateUser container'>
+            <h3 className='text-start'>Modification des informations :</h3>
+            <div className='form-update mx-auto mt-5'>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nom:</label>

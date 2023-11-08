@@ -34,7 +34,7 @@ const Articles = () => {
     const toggleArticle = (event) => {
         setExpandedEvents({
             ...expandedEvents,
-            [event.ID_EVENT]: !expandedEvents[event.ID_EVENT]
+            [event.ID_ARTICLE]: !expandedEvents[event.ID_ARTICLE]
         });
     };
 
@@ -51,13 +51,13 @@ const Articles = () => {
     }
 
     return (
-        <div className='Articles-Admin'>
-            <h1 className='mt-5'>Gérer les articles</h1>
-            <div className='container'>
+        <div className='Articles-Admin container'>
+            <h1 className='mt-3 text-start mb-3'>Gérer les articles</h1>
+            <div>
                 {dataArticle.map(article => (
                     <div className='div-article mt-3' onClick={() => { toggleArticle(article) }} key={article.ID_ARTICLE} >
                         <h4 className='text-center'>{article.TITLE_ARTICLE}</h4>
-                        {expandedEvents[article.ID_EVENT] && (
+                        {expandedEvents[article.ID_ARTICLE] && (
                             <div className='body-article'>
                                 <img className='img-article' src={`/images/articles/${article.ID_ARTICLE}/${article.IMG_ARTICLE}`} alt={article.IMG_ARTICLE} />
                                 <p className='ms-2 text-justify content-article'>{article.CONTENT_ARTICLE}</p>

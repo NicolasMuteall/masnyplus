@@ -147,9 +147,9 @@ const Blog = () => {
     }
 
     return (
-        <div className='Blog'>
-            <h1 className='mt-5'>Actualités Masny Plus</h1>
-            <div className='container'>
+        <div className='Blog container'>
+            <h1 className='mt-5 text-start mb-5'>Actualités Masny Plus</h1>
+            <div>
                 {dataArticle.map((article, index) => (
                     <div className='div-article mt-3 mb-5' key={article.ID_ARTICLE} >
                         <h4 className='text-center'>{article.TITLE_ARTICLE}</h4>

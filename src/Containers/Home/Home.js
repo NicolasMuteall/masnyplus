@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import './_Home.scss';
+import Carousel from '../../Components/Carousel/Carousel';
 
 const Home = () => {
 
@@ -68,6 +69,8 @@ const Home = () => {
                     }
                 </div>
             </aside>
+
+            <Carousel />
         </div>
     );
 };

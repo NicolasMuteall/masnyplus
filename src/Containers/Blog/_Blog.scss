@@ -1,72 +1,77 @@
 @media screen and (max-width: 768px) {
     .Blog {
-        .content-article {
-            width: 100%;
-        }
 
         .img-article {
             margin: auto;
+            margin-bottom: 1em;
+            margin-top: 1em;
+        }
+
+        .body-article {
+            flex-wrap: wrap;
         }
     }
 }
 
-.Blog {
-    .div-article {
-        background-color: rgb(138, 188, 227);
-        border-radius: 5px;
-        padding: 1em;
-        position: relative;
-        color: white;
-        box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.36);
 
-        .body-article {
-            display: flex;
-            position: relative;
-            flex-wrap: wrap;
-        }
-
-        .img-article {
-            width: 200px;
-            height: 200px;
+@media screen {
+    .Blog {
+        .div-article {
+            background-color: rgb(138, 188, 227);
             border-radius: 5px;
+            padding: 1em;
+            position: relative;
+            color: white;
+            box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.36);
+
+            .body-article {
+                display: flex;
+                position: relative;
+            }
+
+            .img-article {
+                width: 200px;
+                height: 200px;
+                border-radius: 5px;
+            }
+
+            .content-article {
+                text-align: justify;
+            }
+
+            .footer-article {
+                display: flex;
+                gap: 5px;
+            }
+
+            form {
+                display: flex;
+                gap: 5px;
+            }
+
+            .comment-div {
+                background-color: rgb(230, 244, 249);
+                padding: 5px;
+                border-radius: 10px;
+                color: rgb(92, 90, 90);
+                display: flex;
+            }
+
+            .content-comment {
+                display: flex;
+                flex-direction: column;
+                flex-grow: 1;
+            }
+
+            .img-delete {
+                width: 20px;
+                height: 20px;
+                cursor: pointer;
+            }
         }
 
-        .content-article {
-            text-align: justify;
+        .div-article:hover {
+            box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.18);
         }
-
-        .footer-article {
-            display: flex;
-            gap: 5px;
-        }
-
-        form {
-            display: flex;
-            gap: 5px;
-        }
-
-        .comment-div {
-            background-color: rgb(230, 244, 249);
-            padding: 5px;
-            border-radius: 10px;
-            color: rgb(92, 90, 90);
-            display: flex;
-        }
-
-        .content-comment {
-            display: flex;
-            flex-direction: column;
-            flex-grow: 1;
-        }
-
-        .img-delete {
-            width: 20px;
-            height: 20px;
-            cursor: pointer;
-        }
-    }
-
-    .div-article:hover {
-        box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.18);
     }
 }
