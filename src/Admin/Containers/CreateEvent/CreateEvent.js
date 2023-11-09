@@ -37,7 +37,7 @@ const CreateEvent = () => {
                 .then((response) => {
                     //console.log(response.data);
                     if (response.data) {
-                        navigate('/admin/manageEvent');
+                        navigate('/admin/Event');
                     }
                 })
                 .catch((error) => {

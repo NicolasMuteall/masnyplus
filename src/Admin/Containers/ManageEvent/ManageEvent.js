@@ -28,7 +28,7 @@ const ManageEvent = () => {
 
     const fetchData = async () => {
         try {
-            const response = await axios.get("/getEvents");
+            const response = await axios.get("/getEventsAdmin");
             console.log(response.data);
             setDataEvent(response.data);
         } catch (error) {
@@ -38,7 +38,7 @@ const ManageEvent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        console.log(modalData);
+        //console.log(modalData);
         const datetimeISO = modalData.DATE_EVENT;
         const formattedDatetime = moment(datetimeISO).format("YYYY-MM-DD HH:mm:ss");
         const updatedData = {
@@ -87,7 +87,7 @@ const ManageEvent = () => {
                     <div className='events mt-3' key={event.ID_EVENT}>
                         <div className='div-event' onClick={() => { setModalData(event); toggleEvent(event); setModal(true) }}>
                             <span>
-                                <span className='fw-bold'>{event.NAME_EVENT}</span> {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
+                                <span className='fw-bold'>{event.NAME_EVENT}:</span> {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
                             <div className='nb-places'>
                                 <span>Places restantes: <span className='fw-bold'>{event.PLACES}</span></span>
