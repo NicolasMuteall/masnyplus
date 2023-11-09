@@ -3,6 +3,7 @@ import './_EditArticle.scss';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const EditArticle = () => {
 
@@ -114,9 +115,10 @@ const EditArticle = () => {
 
 
     return (
-        <div className='EditArticle'>
+        <div className='EditArticle container'>
+            <BtnToAdmin />
             <h1>Editer votre article :</h1>
-            <form onSubmit={handleSubmit} className='w-50 mx-auto mt-5'>
+            <form onSubmit={handleSubmit} className='form-editArticle mx-auto mt-5'>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Titre de l'article:</label>
                     <input type="text" className="form-control" id="title" name='title' onChange={(e) => setTitle(e.target.value)} value={title} />
@@ -149,7 +151,7 @@ const EditArticle = () => {
                     </div>
                 )}
                 <div className='text-center mt-3'>
-                    <button type="submit" className="btn btn-primary">Modifier</button>
+                    <button type="submit" className="btn btn-primary radius50">Modifier</button>
                 </div>
             </form>
         </div>

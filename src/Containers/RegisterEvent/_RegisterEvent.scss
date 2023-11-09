@@ -1,11 +1,40 @@
-.RegisterEvent {
-    .add-div {
-        display: flex;
-        justify-content: space-between;
-    }
+@media screen {
+    .RegisterEvent {
+        .add-div {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-    .header-registered {
-        display: flex;
-        justify-content: space-between;
+        .header-registered {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        .register-user {
+            display: flex;
+            align-items: center;
+            flex-grow: 1;
+        }
+
+        .form-addRegister {
+            width: 35%;
+        }
+
+        .btn-addRegister {
+            margin: auto;
+        }
+    }
+}
+
+@media screen and (max-width: 768px) {
+    .RegisterEvent {
+        .btn-addRegister {
+            margin-top: 1em;
+            margin-bottom: 1em;
+        }
+
+        .form-addRegister {
+            width: 80%;
+        }
     }
 }

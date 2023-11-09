@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import './_ManageEvent.scss';
 import { useSelector } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const ManageEvent = () => {
 
@@ -37,7 +38,7 @@ const ManageEvent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(modalData);
+        console.log(modalData);
         const datetimeISO = modalData.DATE_EVENT;
         const formattedDatetime = moment(datetimeISO).format("YYYY-MM-DD HH:mm:ss");
         const updatedData = {
@@ -79,19 +80,22 @@ const ManageEvent = () => {
 
     return (
         <div className='ManageEvent container'>
-            <h1 className='mt-5'>Gérer les évènements</h1>
+            <BtnToAdmin />
+            <h1>Gerer les evenements</h1>
             <div>
                 {dataEvent.map(event => (
                     <div className='events mt-3' key={event.ID_EVENT}>
                         <div className='div-event' onClick={() => { setModalData(event); toggleEvent(event); setModal(true) }}>
                             <span>
-                                {event.NAME_EVENT} {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
+                                <span className='fw-bold'>{event.NAME_EVENT}</span> {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
-                            <span>Places restantes: {event.PLACES}</span>
+                            <div className='nb-places'>
+                                <span>Places restantes: <span className='fw-bold'>{event.PLACES}</span></span>
+                            </div>
                         </div>
-                        {expandedEvents[event.ID_EVENT] && (
+                        {/* {expandedEvents[event.ID_EVENT] && (
                             <div>Contenu supplémentaire</div>
-                        )}
+                        )} */}
                     </div>
                 ))}
             </div>
@@ -114,12 +118,13 @@ const ManageEvent = () => {
                                 <input type="datetime-local" className="form-control" id="dateEvent" name='dateEvent' onChange={(e) => { setModalData({ ...modalData, DATE_EVENT: e.target.value }) }} value={moment(modalData.DATE_EVENT).format('YYYY-MM-DDTHH:mm')} />
 
                                 <label htmlFor="places" className="form-label">Places restantes:</label>
-                                <input type="number" className="form-control" id="places" name='places' onChange={(e) => { setModalData({ ...modalData, PLACES: e.target.value }) }} value={modalData.PLACES} />
+                                <input type="number" min='0' className="form-control" id="places" name='places' onChange={(e) => { setModalData({ ...modalData, PLACES: e.target.value }) }} value={modalData.PLACES} />
 
-                                <button className='btn btn-success mt-3 d-block mx-auto' onClick={() => { navigate(`/admin/manageRegistered/${modalData.ID_EVENT}`) }} >Voir les inscrits</button>
+                                <button className='btn btn-success mt-3 d-block mx-auto radius50' onClick={() => { navigate(`/admin/manageRegistered/${modalData.ID_EVENT}`) }} >Voir les inscrits</button>
 
-                                <button type="submit" className="btn btn-primary mt-3">Modifier</button>
-                                <button className='btn btn-danger mt-3 ms-1' onClick={() => { handleDelete(modalData.ID_EVENT) }}>Supprimer</button>
+                                <button type="submit" className="btn btn-primary mt-3 radius50">Modifier</button>
+
+                                <button className='btn btn-danger mt-3 ms-1 radius50' onClick={() => { handleDelete(modalData.ID_EVENT) }}>Supprimer</button>
                             </form>
                         </div>
                     </div>

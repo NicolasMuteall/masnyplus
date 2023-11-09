@@ -121,23 +121,23 @@ const RegisterEvent = () => {
 
     return (
         <div className='RegisterEvent container'>
-            <h1 className='text-start'>Inscription à l'évènement : {dataEvent[0] && dataEvent[0].NAME_EVENT}</h1>
+            <h1 className='text-start'>Inscription a l'evenement : {dataEvent[0] && dataEvent[0].NAME_EVENT}</h1>
             <div>
-                <p>places restantes: {dataEvent[0] && dataEvent[0].PLACES}</p>
+                <p>places restantes: <span className='fw-bold'>{dataEvent[0] && dataEvent[0].PLACES}</span></p>
 
                 {!registered ? (
                     <div>
                         <div className='add-div'>
-                            <span>S'inscrire en tant que : {userFirstname} {userName}</span>
-                            <button className='btn btn-secondary' onClick={addField}>Ajouter une personne (5 max)</button>
+                            <span className='register-user'>S'inscrire en tant que:<span className='ms-1 fw-bold'>{userFirstname} {userName}</span></span>
+                            <button className='btn btn-secondary radius50 btn-addRegister' onClick={addField}>Ajouter une personne (5 max)</button>
                         </div>
 
-                        <form onSubmit={handleSubmit}>
+                        <form className='mt-3' onSubmit={handleSubmit}>
                             {fields.map((field, index) => (
-                                <div key={field.id} className='w-50 mx-auto mb-3'>
+                                <div key={field.id} className='form-addRegister mx-auto mb-3'>
                                     <div className='header-registered'>
                                         <div className='fw-bold'>Personne {(field.id) + 2}</div>
-                                        <button className='btn btn-danger' onClick={() => removeField(index)}>Retirer</button>
+                                        <button className='btn btn-danger radius50' onClick={() => removeField(index)}>Annuler</button>
                                     </div>
                                     <label htmlFor={`name_${field.id}`} className="form-label">Nom:</label>
                                     <input
@@ -159,7 +159,7 @@ const RegisterEvent = () => {
                                     />
                                 </div>
                             ))}
-                            <div className='text-center'><button className='btn btn-primary mt-3'>S'inscrire</button></div>
+                            <div className='text-center'><button className='btn btn-primary mt-3 radius50'>S'inscrire</button></div>
                         </form>
 
                     </div>

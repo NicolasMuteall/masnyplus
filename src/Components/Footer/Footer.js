@@ -6,7 +6,7 @@ const Footer = () => {
     return (
         <div className='Footer mt-5'>
             <div className='coordonnees'>
-                <h3>Coordonnées</h3>
+                <h3 className='hindenburg'>Coordonnees</h3>
                 <div className='mb-2'>
                     <img className='location' src="https://img.icons8.com/ios-filled/50/000000/marker.png" alt="marker" />
                     <span>50, Rue Mousseron</span>

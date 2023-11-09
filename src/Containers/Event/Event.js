@@ -112,16 +112,16 @@ const Event = () => {
 
     return (
         <div className='Events container mt-3'>
-            <h1 className='text-start'>Evènements à venir:</h1>
+            <h1 className='text-start'>Evenements a venir :</h1>
             <div>
                 {dataEvent.map(event => (
                     <div className='events mt-3' key={event.ID_EVENT} onClick={() => { toggleEvent(event) }}>
                         <div className='div-event'>
                             <span>
-                                {event.NAME_EVENT} le {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
+                                <span className='fw-bold'>{event.NAME_EVENT}</span> le {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
                             <div className='nb-places'>
-                                <span>Places restantes: {event.PLACES}</span>
+                                <span className='remain-places'>Places restantes: <span className='fw-bold'>{event.PLACES}</span></span>
                                 {(connected && event.PLACES > 0 && event.isRegistered === false) && (
                                     <button className='btn btn-primary ms-2 radius50' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>S'inscrire</button>
                                 )}

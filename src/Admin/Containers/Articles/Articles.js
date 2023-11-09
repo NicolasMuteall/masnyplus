@@ -3,6 +3,7 @@ import './_Articles.scss';
 import React, { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Link, useNavigate } from 'react-router-dom';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const Articles = () => {
 
@@ -52,7 +53,8 @@ const Articles = () => {
 
     return (
         <div className='Articles-Admin container'>
-            <h1 className='mt-3 text-start mb-3'>Gérer les articles</h1>
+            <BtnToAdmin />
+            <h1 className='text-start mb-3'>Gerer les articles</h1>
             <div>
                 {dataArticle.map(article => (
                     <div className='div-article mt-3' onClick={() => { toggleArticle(article) }} key={article.ID_ARTICLE} >

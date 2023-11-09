@@ -1,60 +1,67 @@
-.Events {
-    .events {
-        display: flex;
-        flex-direction: column;
-        background-color: rgb(226, 226, 221);
-        border-radius: 5px;
-        padding: 0.5em;
-        cursor: pointer;
-    }
+@media screen {
+    .Events {
+        .events {
+            display: flex;
+            flex-direction: column;
+            background-color: rgb(193, 221, 241);
+            border-radius: 5px;
+            padding: 0.5em;
+            cursor: pointer;
+        }
 
-    .div-event {
-        display: flex;
-        flex-wrap: wrap;
-    }
+        .div-event {
+            display: flex;
+            flex-wrap: wrap;
+        }
 
-    .nb-places {
-        display: flex;
-        flex-grow: 1;
-        justify-content: flex-end;
-    }
+        .nb-places {
+            display: flex;
+            flex-grow: 1;
+            justify-content: flex-end;
+        }
 
-    .btn-register {
-        width: 87px;
-    }
+        .remain-places {
+            display: flex;
+            align-items: center;
+        }
 
-    .btn-registered {
-        cursor: auto;
-    }
+        .btn-register {
+            width: 87px;
+        }
 
-    .modal-register {
-        background-color: #f4f6f7;
-        position: fixed;
-        top: 50%;
-        left: 50%;
-        transform: translate(-50%, -50%);
-        width: 400px;
-        padding: 2em;
-        padding-top: 0;
-        z-index: 1002;
-    }
+        .btn-registered {
+            cursor: auto;
+        }
 
-    .page-shadow {
-        position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.5);
-        /* Couleur de l'ombre avec une opacité */
-        z-index: 1001;
-        /* Pour empêcher que le contenu centré ne soit caché par l'ombre */
-    }
+        .modal-register {
+            background-color: #f4f6f7;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 400px;
+            padding: 2em;
+            padding-top: 0;
+            z-index: 1002;
+        }
 
-    .close {
-        cursor: pointer;
-        position: absolute;
-        top: 0;
-        right: 0;
+        .page-shadow {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            /* Couleur de l'ombre avec une opacité */
+            z-index: 1001;
+            /* Pour empêcher que le contenu centré ne soit caché par l'ombre */
+        }
+
+        .close {
+            cursor: pointer;
+            position: absolute;
+            top: 0;
+            right: 0;
+        }
     }
 }

@@ -56,7 +56,7 @@ const Login = () => {
     });
 
     return (
-        <div className='Login'>
+        <div className='Login container'>
             <h1>Connexion</h1>
             <div className='form-login w-25 mx-auto mt-5'>
                 <form onSubmit={formik.handleSubmit}>

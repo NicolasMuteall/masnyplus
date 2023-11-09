@@ -211,7 +211,7 @@ const UpdateUser = () => {
                         }
                     </div>
                     <div className='text-center mt-3'>
-                        <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Enregister</button>
+                        <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>Enregister</button>
                     </div>
                 </form>
 
@@ -231,12 +231,12 @@ const UpdateUser = () => {
                         </span>
                     }
                     <div className='text-center mt-3'>
-                        <button type="submit" className="btn btn-primary">Modifier</button>
+                        <button type="submit" className="btn btn-primary radius50">Modifier</button>
                     </div>
                 </form>
 
                 <div className='text-center mt-3'>
-                    <button className='btn btn-danger' onClick={() => { setModal(true) }}>Supprimer mon compte</button></div>
+                    <button className='btn btn-danger radius50' onClick={() => { setModal(true) }}>Supprimer mon compte</button></div>
             </div>
             {modal && (
                 <div className="page-shadow">

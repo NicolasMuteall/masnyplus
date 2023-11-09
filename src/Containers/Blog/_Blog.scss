@@ -17,11 +17,11 @@
 @media screen {
     .Blog {
         .div-article {
-            background-color: rgb(138, 188, 227);
+            background-color: rgb(205 227 243);
             border-radius: 5px;
             padding: 1em;
             position: relative;
-            color: white;
+            color: black;
             box-shadow: 3px 12px 20px 8px rgba(0, 0, 0, 0.36);
 
             .body-article {
@@ -50,7 +50,7 @@
             }
 
             .comment-div {
-                background-color: rgb(230, 244, 249);
+                background-color: rgb(255 255 255);
                 padding: 5px;
                 border-radius: 10px;
                 color: rgb(92, 90, 90);

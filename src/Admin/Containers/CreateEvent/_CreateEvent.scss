@@ -1,1 +1,15 @@
-.CreateEvent {}
+@media screen {
+    .CreateEvent {
+        .form-createEvent {
+            width: 50%;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .CreateEvent {
+        .form-createEvent {
+            width: 80%;
+        }
+    }
+}

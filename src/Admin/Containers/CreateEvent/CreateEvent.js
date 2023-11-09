@@ -4,6 +4,7 @@ import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const CreateEvent = () => {
 
@@ -46,9 +47,10 @@ const CreateEvent = () => {
     });
 
     return (
-        <div className='CreateEvent'>
-            <h1 className='mt-5'>Créer un évènement</h1>
-            <form onSubmit={formik.handleSubmit} className='w-50 mx-auto mt-5'>
+        <div className='CreateEvent container'>
+            <BtnToAdmin />
+            <h1>Creer un evenement</h1>
+            <form onSubmit={formik.handleSubmit} className='form-createEvent mx-auto mt-3'>
                 <div className="mb-3">
                     <label htmlFor="nameEvent" className="form-label">Nom de l'évènement:</label>
                     <input type="text" className="form-control" id="nameEvent" name='nameEvent' onChange={formik.handleChange} value={formik.values.nameEvent} />
@@ -77,7 +79,7 @@ const CreateEvent = () => {
                     }
                 </div>
                 <div className='text-center mt-3'>
-                    <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Créer</button>
+                    <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>Créer</button>
                 </div>
             </form>
         </div>

@@ -39,7 +39,8 @@ const ResetPassword = () => {
             })
             .catch(error => {
                 // Token invalide ou expiré, l'utilisateur n'est pas authentifié
-                console.log('TOKEN INVALIDE', error)
+                console.log('TOKEN INVALIDE', error);
+                setError(true);
             });
     }, [token]);
 
@@ -84,13 +85,13 @@ const ResetPassword = () => {
     });
 
     return (
-        <div className='ResetPassword'>
+        <div className='ResetPassword container'>
             {error ? (
-                <h1>Lien Invalide ou expiré</h1>
+                <h1 className='text-center'>Lien Invalide ou expire</h1>
             ) : (
                 <div>
-                    <h1 className='text-center'>Réinitialisation du mot de passe</h1>
-                    <form className='w-25 mx-auto' onSubmit={formik.handleSubmit}>
+                    <h1 className='mb-3'>Reinitialisation du mot de passe</h1>
+                    <form className='form-reset mx-auto' onSubmit={formik.handleSubmit}>
                         <div className="mb-3">
                             <label htmlFor="Input" className="form-label">
                                 Nouveau mot de passe:

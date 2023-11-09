@@ -5,6 +5,7 @@ import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { useSelector } from 'react-redux';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const CreateArticle = () => {
 
@@ -88,9 +89,10 @@ const CreateArticle = () => {
     });
 
     return (
-        <div className='CreateArticle'>
-            <h1 className='mt-5'>Créer un nouvel article</h1>
-            <form onSubmit={formik.handleSubmit} className='w-50 mx-auto mt-5'>
+        <div className='CreateArticle container'>
+            <BtnToAdmin />
+            <h1>Creer un nouvel article</h1>
+            <form onSubmit={formik.handleSubmit} className='form-createArticle mx-auto mt-3'>
                 <div className="mb-3">
                     <label htmlFor="title" className="form-label">Titre de l'article:</label>
                     <input type="text" className="form-control" id="title" name='title' onChange={formik.handleChange} value={formik.values.title} />
@@ -118,7 +120,7 @@ const CreateArticle = () => {
                     </span>
                 </div>
                 <div className='text-center mt-3'>
-                    <button type="submit" className="btn btn-primary" onClick={formik.handleSubmit}>Créer</button>
+                    <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>Créer</button>
                 </div>
             </form>
         </div>

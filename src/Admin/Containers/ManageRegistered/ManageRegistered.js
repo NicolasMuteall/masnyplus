@@ -53,7 +53,8 @@ const ManageRegistered = () => {
 
     return (
         <div className='ManageRegistered'>
-            <h1 className='mt-5'>Liste des inscrits pour {nameEvent} :</h1>
+            <div className='container'><h1 className='mt-5'>Liste des inscrits pour {nameEvent} :</h1></div>
+
 
             <div className='container container-nb mt-3 mb-3'>
                 <div className='nb-register'>

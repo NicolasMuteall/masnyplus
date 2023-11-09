@@ -97,8 +97,8 @@ const SignUp = () => {
     });
 
     return (
-        <div className='Inscription'>
-            <h1 className='mt-5'>Inscription</h1>
+        <div className='Inscription container'>
+            <h1 className='mt-3'>Inscription</h1>
             <div className='w-25 mx-auto mt-5 form-signUp'>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">

@@ -1,1 +1,15 @@
-.CreateArticle {}
+@media screen {
+    .CreateArticle {
+        .form-createArticle {
+            width: 50%;
+        }
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .CreateArticle {
+        .form-createArticle {
+            width: 80%;
+        }
+    }
+}
