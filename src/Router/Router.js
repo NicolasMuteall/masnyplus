@@ -49,9 +49,7 @@ const Router = () => {
                     <Route path="*" element={<Navigate to='/404' />} />
                 </Routes>
             </div>
-            <footer>
-                <Footer />
-            </footer>
+            <Footer />
         </>
     );
 };

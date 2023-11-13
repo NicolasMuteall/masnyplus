@@ -38,7 +38,7 @@ const SignUp = () => {
                     if (value && value.length === 5) {
                         axios.get(`https://geo.api.gouv.fr/communes?codePostal=${value}`)
                             .then((response) => {
-                                console.log(response.data);
+                                //console.log(response.data);
                                 setCommunes(response.data);
                                 if (response.data.length === 0) {
                                     setSelectedVille('');
@@ -104,7 +104,7 @@ const SignUp = () => {
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nom:</label>
                         <input type="text" className="form-control" id="name" name='name' onChange={formik.handleChange} value={formik.values.name} />
-                        {formik.errors.name &&
+                        {(formik.touched.name && formik.errors.name) &&
                             <span style={{ color: 'red' }}>
                                 {formik.errors.name}
                             </span>
@@ -114,7 +114,7 @@ const SignUp = () => {
                     <div className="mb-3">
                         <label htmlFor="firstname" className="form-label">Prénom:</label>
                         <input type="text" className="form-control" id="firstname" name='firstname' onChange={formik.handleChange} value={formik.values.firstname} />
-                        {formik.errors.firstname &&
+                        {(formik.touched.firstname && formik.errors.firstname) &&
                             <span style={{ color: 'red' }}>
                                 {formik.errors.firstname}
                             </span>
@@ -131,7 +131,7 @@ const SignUp = () => {
                         <div className='ms-2 div-ville'>
                             <label htmlFor="Ville" className="form-label">Ville:</label>
                             <select className="form-select" aria-label="Default select example" value={selectedVille} onChange={handleSelectChange}>
-                                {/* <option value=''>...</option> */}
+                                <option value=''>sélectionnez votre ville</option>
                                 {communes.map((commune, index) => (
                                     <React.Fragment key={index}>
                                         <option value={commune.nom}>{commune.nom}</option>
@@ -141,7 +141,7 @@ const SignUp = () => {
                         </div>
                     </div>
 
-                    {formik.errors.codePostal &&
+                    {(formik.touched.codePostal && formik.errors.codePostal) &&
                         <span style={{ color: 'red' }}>
                             {formik.errors.codePostal}
                         </span>
@@ -156,7 +156,7 @@ const SignUp = () => {
                     <div className="mb-3">
                         <label htmlFor="mail" className="form-label">Adresse mail:</label>
                         <input type="mail" className="form-control" id="mail" name='mail' onChange={formik.handleChange} value={formik.values.mail} />
-                        {formik.errors.mail &&
+                        {(formik.touched.mail && formik.errors.mail) &&
                             <span style={{ color: 'red' }}>
                                 {formik.errors.mail}
                             </span>
@@ -170,7 +170,7 @@ const SignUp = () => {
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Mot de passe:</label>
                         <input type="password" className="form-control" id="password" name='password' onChange={formik.handleChange} value={formik.values.password} />
-                        {formik.errors.password &&
+                        {(formik.touched.password && formik.errors.password) &&
                             <span style={{ color: 'red' }}>
                                 {formik.errors.password}
                             </span>

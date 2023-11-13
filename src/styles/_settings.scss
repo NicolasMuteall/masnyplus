@@ -9,8 +9,20 @@
     src: url('./font/hindenburg/Hindenburg.ttf') format('truetype')
 }
 
+@font-face {
+    font-family: 'niconne';
+    src: url('./font/niconne/Niconne-Regular.ttf') format('truetype')
+}
+
+$myColor: #e73b3b;
+$text-color: white;
+
 .hindenburg {
     font-family: 'hindenburg';
+}
+
+.niconne {
+    font-family: 'niconne';
 }
 
 body {

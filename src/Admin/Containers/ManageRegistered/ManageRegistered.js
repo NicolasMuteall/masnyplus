@@ -3,6 +3,7 @@ import './_ManageRegistered.scss';
 import { useSelector } from 'react-redux';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
+import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
 
 const ManageRegistered = () => {
 
@@ -53,8 +54,10 @@ const ManageRegistered = () => {
 
     return (
         <div className='ManageRegistered'>
-            <div className='container'><h1 className='mt-5'>Liste des inscrits pour {nameEvent} :</h1></div>
-
+            <div className='container'>
+                <BtnToAdmin />
+                <h1>Liste des inscrits pour {nameEvent} :</h1>
+            </div>
 
             <div className='container container-nb mt-3 mb-3'>
                 <div className='nb-register'>

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import './_Home.scss';
 import Carousel from '../../Components/Carousel/Carousel';
+import mosaique from '../../assets/mosaique.jpg';
 
 const Home = () => {
 
@@ -9,10 +10,12 @@ const Home = () => {
     const [faq3, setFaq3] = useState(false);
 
     return (
-        <div className='Home container'>
+        <div className='Home container mt-5 mb-3'>
             <main className='mb-5'>
                 <div className='div-img'>
-                    <div className='replace-img'></div>
+                    <div className='replace-img'>
+                        <img src={mosaique} alt="mosaique" />
+                    </div>
                 </div>
                 <div className='p-2 ms-2'>
                     <h1>Masny Plus</h1>
@@ -29,9 +32,9 @@ const Home = () => {
                     <div className='faq-headers'>
                         <h6 className='fw-bold'>Qui sommes-nous ?</h6>
                         {faq1 === false ? (
-                            <button className='btn btn-primary btn-rounded' onClick={() => { setFaq1(true) }}>+</button>
+                            <button className='btn btn-primary btn-rounded btn-moins' onClick={() => { setFaq1(true) }}>+</button>
                         ) : (
-                            <button className='btn btn-danger btn-rounded btn-moins' onClick={() => { setFaq1(false) }}>-</button>
+                            <button className='btn btn-secondary btn-rounded btn-moins' onClick={() => { setFaq1(false) }}>-</button>
                         )}
                     </div>
                     {faq1 &&
@@ -44,9 +47,9 @@ const Home = () => {
                     <div className='faq-headers'>
                         <h6 className='fw-bold'>Quels évènements organisons-nous ?</h6>
                         {faq2 === false ? (
-                            <button className='btn btn-primary btn-rounded' onClick={() => { setFaq2(true) }}>+</button>
+                            <button className='btn btn-primary btn-rounded btn-moins' onClick={() => { setFaq2(true) }}>+</button>
                         ) : (
-                            <button className='btn btn-danger btn-rounded btn-moins' onClick={() => { setFaq2(false) }}>-</button>
+                            <button className='btn btn-secondary btn-rounded btn-moins' onClick={() => { setFaq2(false) }}>-</button>
                         )}
                     </div>
                     {faq2 &&
@@ -59,9 +62,9 @@ const Home = () => {
                     <div className='faq-headers'>
                         <h6 className='fw-bold'>Nos tarifs ?</h6>
                         {faq3 === false ? (
-                            <button className='btn btn-primary btn-rounded' onClick={() => { setFaq3(true) }}>+</button>
+                            <button className='btn btn-primary btn-rounded btn-moins' onClick={() => { setFaq3(true) }}>+</button>
                         ) : (
-                            <button className='btn btn-danger btn-rounded btn-moins' onClick={() => { setFaq3(false) }}>-</button>
+                            <button className='btn btn-secondary btn-rounded btn-moins' onClick={() => { setFaq3(false) }}>-</button>
                         )}
                     </div>
                     {faq3 &&

@@ -1,34 +1,30 @@
+@import '../../styles/settings';
+
 .Footer {
-    background-color: #cee3f1;
+    background-color: $myColor;
     width: 100%;
-    min-height: 200px;
     display: flex;
     align-items: center;
-    justify-content: space-around;
+    justify-content: center;
+    gap: 20px;
     flex-wrap: wrap;
+    font-size: 12px;
+    padding-top: 10px;
+    color: $text-color;
 
     img {
-        width: 120px;
-        height: 110px;
-    }
-
-    .coordonnees {
-        display: flex;
-        flex-direction: column;
+        width: 100px;
     }
 
     .location {
         width: 20px;
-        height: 20px;
     }
 
     .email {
-        width: 20px;
-        height: 20px;
+        width: 18px;
     }
 
     .telephone {
-        width: 20px;
-        height: 20px;
+        width: 18px;
     }
 }
