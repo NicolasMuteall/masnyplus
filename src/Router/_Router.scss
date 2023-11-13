@@ -1,5 +1,9 @@
 .main-container {
-    min-height: 85.5vh;
+    min-height: 100vh;
     display: flex;
     flex-direction: column;
+
+    .body-container {
+        flex-grow: 1;
+    }
 }

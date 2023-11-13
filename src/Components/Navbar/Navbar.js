@@ -3,7 +3,6 @@ import './_Navbar.scss';
 import logo from '../../assets/logo-MasnyPlus.png';
 import { Link, useNavigate } from 'react-router-dom';
 import { useDispatch, useSelector } from 'react-redux';
-import logout from '../../assets/logout.png';
 import axios from 'axios';
 import { setLogin } from '../../store';
 
@@ -59,10 +58,10 @@ const Navbar = () => {
             <div className='Navbar'>
                 <div className='p-1 menu-burger' onClick={() => { setNav(!nav) }}>
                     <svg width="42" height="42" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
-                        <rect width="48" height="48" fill="white" fill-opacity="0.01" />
-                        <path d="M7.94977 11.9498H39.9498" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.94977 23.9498H39.9498" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
-                        <path d="M7.94977 35.9498H39.9498" stroke="white" stroke-width="4" stroke-linecap="round" stroke-linejoin="round" />
+                        <rect width="48" height="48" fill="white" fillOpacity="0.01" />
+                        <path d="M7.94977 11.9498H39.9498" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M7.94977 23.9498H39.9498" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
+                        <path d="M7.94977 35.9498H39.9498" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </div>
                 <div className='logo' onClick={() => { setNav(false) }}><Link to='/'>

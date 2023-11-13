@@ -24,9 +24,9 @@ import Footer from '../Components/Footer/Footer';
 
 const Router = () => {
     return (
-        <>
+        <div className='main-container'>
             <Navbar />
-            <div className='main-container'>
+            <div className='body-container'>
                 <Routes>
                     <Route path='/' element={< Home />} />
                     <Route path='/signUp' element={< SignUp />} />
@@ -50,7 +50,7 @@ const Router = () => {
                 </Routes>
             </div>
             <Footer />
-        </>
+        </div>
     );
 };
 

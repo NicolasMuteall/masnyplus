@@ -27,10 +27,10 @@ const SignUp = () => {
         },
         validationSchema: Yup.object().shape({
             name: Yup.string()
-                .min(5, 'Votre nom doit avoir plus de 5 caractères')
+                .min(3, 'Votre nom doit avoir plus de 3 caractères')
                 .required("Le nom est obligatoire !"),
             firstname: Yup.string()
-                .min(5, 'Votre prénom doit avoir plus de 5 caractères')
+                .min(3, 'Votre prénom doit avoir plus de 3 caractères')
                 .required("Le prénom est obligatoire !"),
             codePostal: Yup.string()
                 .matches(/^[0-9]{5}$/, 'Le code postal doit comporter exactement 5 chiffres')

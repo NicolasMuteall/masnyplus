@@ -1,8 +1,8 @@
 import React from 'react';
 import './_Carousel.scss';
-import erreur404 from '../../assets/erreur404.png';
-import logo from '../../assets/logo-MasnyPlus.png';
-import masny from '../../assets/logoMasny.png';
+import jeu from '../../assets/masnyPlus-jeu.JPG';
+import halloween from '../../assets/masnyPlus-halloween.JPG';
+import gonflable from '../../assets/masnyPlus-gonflable.JPG';
 
 const Carousel = () => {
     return (
@@ -14,24 +14,21 @@ const Carousel = () => {
             </div>
             <div className="carousel-inner">
                 <div className="carousel-item active">
-                    <img src={erreur404} className="d-block w-100" alt="..." />
+                    <img src={jeu} className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-none d-md-block">
-                        <h5>First slide label</h5>
-                        <p>Some representative placeholder content for the first slide.</p>
+                        <h5>Quartiers d'été</h5>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src={logo} className="d-block w-100" alt="..." />
+                    <img src={halloween} className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-none d-md-block">
-                        <h5>Second slide label</h5>
-                        <p>Some representative placeholder content for the second slide.</p>
+                        <h5>Halloween</h5>
                     </div>
                 </div>
                 <div className="carousel-item">
-                    <img src={masny} className="d-block w-100" alt="..." />
+                    <img src={gonflable} className="d-block w-100" alt="..." />
                     <div className="carousel-caption d-none d-md-block">
-                        <h5>Third slide label</h5>
-                        <p>Some representative placeholder content for the third slide.</p>
+                        <h5>Quartiers d'été</h5>
                     </div>
                 </div>
             </div>

@@ -3,7 +3,7 @@ import './_Footer.scss';
 
 const Footer = () => {
     return (
-        <div className='Footer'>
+        <div className='Footer mt-3'>
             <div>
                 <div className='mb-2'>
                     <img className='location' src="https://img.icons8.com/ios-filled/50/000000/marker.png" alt="marker" />
