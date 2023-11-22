@@ -49,7 +49,7 @@ const Users = () => {
 
     return (
         <>
-            <div className='container'>
+            <div className='container-fluid mt-3'>
                 <BtnToAdmin />
                 <h1>Gerer les utilisateurs</h1>
             </div>

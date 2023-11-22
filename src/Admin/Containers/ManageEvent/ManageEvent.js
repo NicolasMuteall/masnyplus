@@ -38,7 +38,6 @@ const ManageEvent = () => {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        //console.log(modalData);
         const datetimeISO = modalData.DATE_EVENT;
         const formattedDatetime = moment(datetimeISO).format("YYYY-MM-DD HH:mm:ss");
         const updatedData = {
@@ -47,7 +46,6 @@ const ManageEvent = () => {
         };
         axios.put(`/updateEvent/${modalData.ID_EVENT}`, updatedData)
             .then((response) => {
-                //console.log(response.data);
                 if (response.data) {
                     fetchData();
                     setModal(false);

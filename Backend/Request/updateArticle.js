@@ -1,7 +1,6 @@
 const updateArticle = (app, connection) => {
     app.put('/updateArticle/:id', (req, res) => {
         const idArticle = req.params.id;
-        //console.log(req.body);
         const { title, content, nameImage } = req.body;
         let query
 

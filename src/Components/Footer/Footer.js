@@ -21,9 +21,6 @@ const Footer = () => {
                     <span className='ms-2'>06 80 63 25 19</span>
                 </div>
             </div>
-            {/* <div>
-                <img src={logo} alt="logo-MasnyPlus" />
-            </div> */}
         </div>
     );
 };

@@ -70,9 +70,11 @@ const UpdateUser = () => {
         validationSchema: Yup.object().shape({
             name: Yup.string()
                 .min(5, 'Votre nom doit avoir plus de 5 caractères')
+                .max(20, 'Votre nom doit avoir moins de 20 caractères')
                 .required("Le nom est obligatoire !"),
             firstname: Yup.string()
                 .min(5, 'Votre prénom doit avoir plus de 5 caractères')
+                .max(20, 'Votre prénom doit avoir moins de 20 caractères')
                 .required("Le prénom est obligatoire !"),
             city: Yup.string()
                 .min(3, 'Le nom de la ville doit comporter au moins 3 caractères')
@@ -85,7 +87,6 @@ const UpdateUser = () => {
         onSubmit: async (values) => {
             const { name, mail, firstname, city } = values;
             console.log(values);
-            //const hashedPassword = await bcrypt.hash(password, 10);
 
             axios.put(`/updateUserConnected/${userId}`, {
                 mail: mail,
@@ -125,7 +126,6 @@ const UpdateUser = () => {
 
         try {
             const verifPassword = await axios.post(`/verifyPassword`, { userId: userId, password: sanitizedOldPassword })
-            //console.log(verifPassword.data);
             if (verifPassword.data === false) {
                 setCustomErrors({ ...customErrors, password: "L'ancien mot de passe saisi est incorrect" });
                 return;
@@ -138,7 +138,6 @@ const UpdateUser = () => {
 
             if (verifPassword.data) {
                 const updatePassword = await axios.put(`/updatePassword`, { userId: userId, password: hashedPassword })
-                //console.log(updatePassword.data);
                 if (updatePassword.data) {
                     setCustomErrors({ ...customErrors, password: '' });
                     setNewPassword('');
@@ -165,9 +164,9 @@ const UpdateUser = () => {
     }
 
     return (
-        <div className='UpdateUser container'>
-            <h3 className='text-start'>Modification des informations :</h3>
-            <div className='form-update mx-auto mt-5'>
+        <div className='UpdateUser container mt-3'>
+            <h3 className='text-start hindenburg'>Modification des informations :</h3>
+            <div className='form-update mx-auto mt-3'>
                 <form onSubmit={formik.handleSubmit}>
                     <div className="mb-3">
                         <label htmlFor="name" className="form-label">Nom:</label>
@@ -214,8 +213,10 @@ const UpdateUser = () => {
                         <button type="submit" className="btn btn-primary radius50" onClick={formik.handleSubmit}>Enregister</button>
                     </div>
                 </form>
+            </div>
 
-                <h4 className='mt-3'>Modification du mot de passe :</h4>
+            <h4 className='mt-3 hindenburg'>Modification du mot de passe :</h4>
+            <div className='form-update mx-auto mt-3'>
                 <form onSubmit={submitPassword}>
                     <div className="mb-3">
                         <label htmlFor="password" className="form-label">Ancien mot de passe:</label>
@@ -234,10 +235,12 @@ const UpdateUser = () => {
                         <button type="submit" className="btn btn-primary radius50">Modifier</button>
                     </div>
                 </form>
-
-                <div className='text-center mt-3'>
-                    <button className='btn btn-danger radius50' onClick={() => { setModal(true) }}>Supprimer mon compte</button></div>
             </div>
+
+            <div className='text-center mt-3'>
+                <button className='btn btn-danger radius50' onClick={() => { setModal(true) }}>Supprimer mon compte</button>
+            </div>
+
             {modal && (
                 <div className="page-shadow">
                     <div className='modal-delete border text-center rounded'>
@@ -246,8 +249,8 @@ const UpdateUser = () => {
                         </span>
                         <p className='mt-3'>Voulez-vous vraiment supprimer le compte ?</p>
                         <div>
-                            <button className='btn btn-primary' onClick={() => setModal(false)}>Non</button>
-                            <button className='btn btn-danger ms-1' onClick={handleDelete}>Oui</button>
+                            <button className='btn btn-danger' onClick={handleDelete}>Oui</button>
+                            <button className='btn btn-primary ms-1' onClick={() => setModal(false)}>Non</button>
                         </div>
                     </div>
                 </div>

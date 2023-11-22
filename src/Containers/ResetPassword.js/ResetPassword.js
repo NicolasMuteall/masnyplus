@@ -30,15 +30,12 @@ const ResetPassword = () => {
             },
         })
             .then(response => {
-                //console.log(response.data);
                 if (!response.data) {
                     setError(true);
                 }
-                //console.log(response.data.userId);
                 setIdUser(response.data.userId)
             })
             .catch(error => {
-                // Token invalide ou expiré, l'utilisateur n'est pas authentifié
                 console.log('TOKEN INVALIDE', error);
                 setError(true);
             });
@@ -62,7 +59,6 @@ const ResetPassword = () => {
         }),
         onSubmit: async (values) => {
             const { password, confirmPassword } = values;
-            //console.log(values);
 
             if (password !== confirmPassword) {
                 setCustomErrors({ ...customErrors, password: "Les 2 champs saisis ne correspondent pas" });

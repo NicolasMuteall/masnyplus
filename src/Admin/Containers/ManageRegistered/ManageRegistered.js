@@ -12,7 +12,6 @@ const ManageRegistered = () => {
     const param = useParams();
     const eventId = param.eventId;
     const [dataRegister, setDataRegister] = useState([]);
-    const [dataEvent, setDataEvent] = useState([]);
     const [nbPlaces, setNbPlaces] = useState(0);
     const [nameEvent, setNameEvent] = useState('');
 
@@ -25,7 +24,6 @@ const ManageRegistered = () => {
     useEffect(() => {
         axios.get(`/getRegistered/${eventId}`)
             .then((response) => {
-                //console.log(response.data);
                 const dataWithIndividualNames = response.data.map(data => ({
                     ...data,
                     individualNames: data.NAMES_REGISTER.split(', '),
@@ -40,7 +38,7 @@ const ManageRegistered = () => {
     }, [eventId])
 
     useEffect(() => {
-        axios.get('/getEvents')
+        axios.get('/getEventsAdmin')
             .then((response) => {
                 //console.log(response.data);
                 const events = response.data;
@@ -54,7 +52,7 @@ const ManageRegistered = () => {
 
     return (
         <div className='ManageRegistered'>
-            <div className='container'>
+            <div className='container-fluid'>
                 <BtnToAdmin />
                 <h1>Liste des inscrits pour {nameEvent} :</h1>
             </div>

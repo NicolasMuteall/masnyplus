@@ -8,7 +8,7 @@ import storage from 'redux-persist/lib/storage';
 // Store
 
 const initStore = {
-  idUser: '', // Par défaut, 0 si aucune valeur n'est trouvée
+  idUser: '',
   nom: '',
   prenom: '',
   role: '',
@@ -88,8 +88,8 @@ const rootReducers = (state = initStore, action) => {
 
 // Create the Redux store
 const persistConfig = {
-  key: 'root', // La clé racine pour le stockage local
-  storage, // Utilisez le stockage local (vous pouvez changer cela en sessionStorage ou tout autre stockage)
+  key: 'root',
+  storage,
 };
 
 const persistedReducer = persistReducer(persistConfig, rootReducers);

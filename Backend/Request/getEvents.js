@@ -2,7 +2,7 @@ const getEvents = (app, connection) => {
 
     app.get('/getEvents', (req, res) => {
 
-        const sql = "SELECT ID_EVENT, NAME_EVENT, DATE_EVENT, PLACES, CREATED_AT FROM events WHERE DATE_EVENT > NOW() ORDER BY DATE_EVENT DESC";
+        const sql = "SELECT ID_EVENT, NAME_EVENT, DATE_EVENT, PLACES, CREATED_AT FROM events WHERE DATE_EVENT > NOW() ORDER BY DATE_EVENT ASC";
 
         connection.query(sql, (err, results) => {
             if (err) {
@@ -16,7 +16,7 @@ const getEvents = (app, connection) => {
 
     app.get('/getEventsAdmin', (req, res) => {
 
-        const sql = "SELECT ID_EVENT, NAME_EVENT, DATE_EVENT, PLACES, CREATED_AT FROM events ORDER BY DATE_EVENT DESC";
+        const sql = "SELECT ID_EVENT, NAME_EVENT, DATE_EVENT, PLACES, CREATED_AT FROM events ORDER BY DATE_EVENT ASC";
 
         connection.query(sql, (err, results) => {
             if (err) {

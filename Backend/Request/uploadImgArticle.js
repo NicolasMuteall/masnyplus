@@ -20,10 +20,8 @@ const uploadImg = (app, multer, path, connection) => {
                         cb(null, file.originalname);
                     },
                 });
-
                 const upload = multer({ storage });
 
-                // Ensuite, configurez le middleware de téléchargement pour le chargement du fichier
                 upload.single('image')(req, res, (uploadErr) => {
                     if (uploadErr) {
                         console.error('Erreur lors du téléchargement du fichier :', uploadErr);

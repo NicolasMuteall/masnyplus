@@ -1,11 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import './_Login.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { Link, useNavigate } from 'react-router-dom';
 import he from 'he';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { setIdUser, setNom, setPrenom, setRole, setToken } from '../../store';
 
 const Login = () => {
@@ -13,6 +13,13 @@ const Login = () => {
     const [customErrors, setCustomErrors] = useState({});
     const navigate = useNavigate();
     const dispatch = useDispatch();
+    const connected = useSelector((state) => state.login);
+
+    useEffect(() => {
+        if (connected) {
+            navigate('/');
+        }
+    }, [connected, navigate])
 
     const formik = useFormik({
         initialValues: {
@@ -29,18 +36,13 @@ const Login = () => {
             const { mail, password } = values;
             const sanitizedMail = he.encode(mail);
             const sanitizedPassword = he.encode(password);
-            //console.log(sanitizedMail);
-            //console.log(sanitizedPassword);
 
             try {
                 const login = await axios.post("/login", { mail: sanitizedMail, password: sanitizedPassword })
-                //console.log(login.data);
                 if (login.data === false) {
-                    // Mettez à jour les erreurs personnalisées
                     setCustomErrors({ error: 'Identifiants incorrects' });
                 } else {
                     const token = await axios.put(`/createToken/${login.data.ID_USER}`)
-                    //console.log(token.data.token);
                     dispatch(setToken(token.data.token));
                     dispatch(setIdUser(login.data.ID_USER));
                     dispatch(setNom(login.data.NAME_USER));
@@ -48,7 +50,6 @@ const Login = () => {
                     dispatch(setRole(login.data.ROLE_USER));
                     navigate('/');
                 }
-
             } catch (error) {
                 console.error("Erreur lors de la connexion", error);
             }

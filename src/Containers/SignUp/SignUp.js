@@ -28,9 +28,11 @@ const SignUp = () => {
         validationSchema: Yup.object().shape({
             name: Yup.string()
                 .min(3, 'Votre nom doit avoir plus de 3 caractères')
+                .max(20, 'Votre nom doit avoir moins de 20 caractères')
                 .required("Le nom est obligatoire !"),
             firstname: Yup.string()
                 .min(3, 'Votre prénom doit avoir plus de 3 caractères')
+                .max(20, 'Votre prénom doit avoir moins de 20 caractères')
                 .required("Le prénom est obligatoire !"),
             codePostal: Yup.string()
                 .matches(/^[0-9]{5}$/, 'Le code postal doit comporter exactement 5 chiffres')
@@ -84,7 +86,6 @@ const SignUp = () => {
                 .then((response) => {
                     console.log(response.data);
                     if (response.data === true) {
-                        // Mettez à jour les erreurs personnalisées
                         setCustomErrors({ ...customErrors, mail: 'Cette adresse email est déjà utilisée' });
                     } else {
                         navigate('/login')

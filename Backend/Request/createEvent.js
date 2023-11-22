@@ -1,12 +1,9 @@
 const createEvent = (app, connection) => {
 
-    // CREER UN COMPTE POUR ADMIN
     app.post('/createEvent', (req, res) => {
-        //console.log(req.body);
         const { nameEvent, dateEvent, places } = req.body;
 
-        connection.query("INSERT INTO events (NAME_EVENT, DATE_EVENT, PLACES) VALUES (?,?,?)",
-            [nameEvent, dateEvent, places],
+        connection.query("INSERT INTO events (NAME_EVENT, DATE_EVENT, PLACES) VALUES (?,?,?)", [nameEvent, dateEvent, places],
             (error, result) => {
                 if (error) {
                     console.error('Erreur lors de l\'insertion', error);

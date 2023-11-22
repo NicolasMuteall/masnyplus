@@ -33,7 +33,6 @@ const Navbar = () => {
                 }
             })
             .catch(error => {
-                // Token invalide ou expiré, l'utilisateur n'est pas authentifié
                 console.log('TOKEN INVALIDE', error)
             });
     }, [token, navigate, dispatch])
@@ -55,7 +54,7 @@ const Navbar = () => {
 
     return (
         <>
-            <div className='Navbar'>
+            <div className='Navbar mb-3'>
                 <div className='p-1 menu-burger' onClick={() => { setNav(!nav) }}>
                     <svg width="42" height="42" viewBox="0 0 48 48" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <rect width="48" height="48" fill="white" fillOpacity="0.01" />
@@ -64,9 +63,11 @@ const Navbar = () => {
                         <path d="M7.94977 35.9498H39.9498" stroke="white" strokeWidth="4" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                 </div>
-                <div className='logo' onClick={() => { setNav(false) }}><Link to='/'>
-                    <img className='pointer' src={logo} alt="logo Masny Plus" /></Link>
-                    <span className='niconne fs-3 menu-name pointer'>Masny Plus</span>
+                <div className='logo' onClick={() => { setNav(false) }}>
+                    <Link to='/'>
+                        <img className='pointer' src={logo} alt="logo Masny Plus" />
+                        <span className='niconne fs-3 menu-name pointer'>Masny Plus</span>
+                    </Link>
                 </div>
                 <ul className='menu hindenburg'>
                     <Link to='/events'><li className='pointer'>Evenements</li></Link>
@@ -96,7 +97,6 @@ const Navbar = () => {
                     </div>
                     {connected && (
                         <div className='pointer' onClick={handleClickLogout}>
-                            {/* <img className='logout' src={logout} alt="logout" /> */}
                             <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 24 24" className='logout'>
                                 <path fill="none" d="M0 0h24v24H0z" />
                                 <path d="M12 22C6.477 22 2 17.523 2 12S6.477 2 12 2a9.985 9.985 0 0 1 8 4h-2.71a8 8 0 1 0 .001 12h2.71A9.985 9.985 0 0 1 12 22zm7-6v-3h-8v-2h8V8l5 4-5 4z" fill='white' />

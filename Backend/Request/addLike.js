@@ -2,11 +2,9 @@ const addLike = (app, connection) => {
 
     app.post("/addLike", (req, res) => {
         const { userId, articleId } = req.body;
-        //console.log(userId, articleId);
 
         connection.query("SELECT ID_LIKE FROM likes WHERE ID_USER = ? AND ID_ARTICLE = ?", [userId, articleId], function (err, result) {
             if (err) throw err;
-            //console.log(result);
 
             if (result.length === 0) {
                 connection.query("INSERT INTO likes (ID_USER, ID_ARTICLE) VALUES (?, ?)", [userId, articleId], function (err, result) {

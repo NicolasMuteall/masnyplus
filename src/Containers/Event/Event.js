@@ -23,8 +23,6 @@ const Event = () => {
                         axios.get("/getEvents"),
                         axios.get(`/verifRegister-user/${userId}`),
                     ]);
-                    //console.log(eventsResponse.data);
-                    //console.log(registersResponse.data);
 
                     const events = eventsResponse.data;
                     const registers = registersResponse.data;
@@ -121,7 +119,7 @@ const Event = () => {
                                 <span className='fw-bold'>{event.NAME_EVENT}</span> le {moment(event.DATE_EVENT).format('DD/MM/YYYY')} à {moment(event.DATE_EVENT).format('HH:mm')}
                             </span>
                             <div className='nb-places'>
-                                <span className='remain-places'>Places restantes: <span className='fw-bold'>{event.PLACES}</span></span>
+                                <span className='remain-places'>Places restantes:<span className='fw-bold'> {event.PLACES}</span></span>
                                 {(connected && event.PLACES > 0 && event.isRegistered === false) && (
                                     <button className='btn btn-primary ms-2 radius50' onClick={() => { navigate(`/event/${event.ID_EVENT}`) }}>S'inscrire</button>
                                 )}

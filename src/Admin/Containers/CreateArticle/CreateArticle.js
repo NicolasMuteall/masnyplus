@@ -37,14 +37,13 @@ const CreateArticle = () => {
                 .required("L'article doit avoir un contenu"),
         }),
         onSubmit: async (values) => {
-            //console.log(values, image);
             const { title, content } = values;
-            let nameImage
 
+            let nameImage
             if (image !== '') {
                 nameImage = image.name;
                 if (image) {
-                    const allowedFormats = ["image/jpeg", "image/png", "image/gif"];
+                    const allowedFormats = ["image/jpeg", "image/png"];
                     if (!allowedFormats.includes(image.type)) {
                         setErrorImage('Format de fichier non pris en charge.');
                         return; // Arrêtez le traitement

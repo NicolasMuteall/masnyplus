@@ -1,14 +1,22 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import './_CreateEvent.scss';
 import { useFormik } from 'formik';
 import * as Yup from 'yup';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BtnToAdmin from '../../Components/BtntoAdmin/BtnToAdmin';
+import { useSelector } from 'react-redux';
 
 const CreateEvent = () => {
 
     const navigate = useNavigate();
+    const role = useSelector((state) => state.role);
+
+    useEffect(() => {
+        if (role !== 'admin') {
+            navigate('/');
+        }
+    }, [navigate, role])
 
     const formik = useFormik({
         initialValues: {
